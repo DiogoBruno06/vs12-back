@@ -5,14 +5,14 @@ public class Questao5 {
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Digite a altura");
-        Double altura = teclado.nextDouble();
+        double altura = teclado.nextDouble();
 
         System.out.println("Digite a base");
-        Double base = teclado.nextDouble();
+        double base = teclado.nextDouble();
 
-        Double area = base * altura;
+        double area = base * altura;
 
-        System.out.println(area);
+        System.out.println("A área do retangulo é: "+area);
 
 
     }

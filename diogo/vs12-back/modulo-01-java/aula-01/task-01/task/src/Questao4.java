@@ -6,9 +6,10 @@ public class Questao4 {
         int a = 10;
         int b = 20;
 
-        a = a + b;
-        b = a - b;
-        a = a - b;
+        int soma = a - b;
+        b += soma;
+        a += b;
+
 
         System.out.println(a);
         System.out.println(b);
