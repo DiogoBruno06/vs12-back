@@ -38,9 +38,9 @@ class ContaTest {
     @Test
     @DisplayName("Questão 2")
     void TestarSaqueContaCorrenteSemSaldo() {
-        double testaSaque = contaCorrente.getSaldo() + contaCorrente.getChequeEspecial();
+        boolean valor = contaCorrente.depositar(contaCorrente.getChequeEspecial());
         boolean testaSaque2 = contaCorrente.sacar(30000);
-        Assertions.assertEquals(testaSaque2,testaSaque);
+        Assertions.assertEquals(false,testaSaque2);
 
     }
 
@@ -60,7 +60,7 @@ class ContaTest {
     @DisplayName("Questão 4")
     void TestarSaqueContaPoupancaSemSaldo(){
         boolean testaSaque = contaPoupanca.sacar(1200);
-        Assertions.assertEquals(true,testaSaque);
+        Assertions.assertEquals(false,testaSaque);
 
     }
 
@@ -77,7 +77,7 @@ class ContaTest {
     @DisplayName("Questão 6")
     void TestaSaqueContaPagamentoSemSaldo(){
         boolean testaSaque = contaPagamento.sacar(5000);
-        Assertions.assertEquals(true,testaSaque);
+        Assertions.assertEquals(false,testaSaque);
     }
     @Test
     @DisplayName("Questão 7")
@@ -92,7 +92,7 @@ class ContaTest {
     @DisplayName("Questão 8")
     void TestarTransferenciaSemSaldo(){
         boolean testaTransferencia = contaPagamento.transferir(contaCorrente,1200);
-        Assertions.assertEquals(true,testaTransferencia);
+        Assertions.assertEquals(false,testaTransferencia);
     }
 
     @Test
@@ -106,6 +106,6 @@ class ContaTest {
     @DisplayName("Questão 10")
     void TestaDepositoNegativo(){
         boolean testaDeposito = contaCorrente.depositar(-1);
-        Assertions.assertEquals(true,testaDeposito);
+        Assertions.assertEquals(false,testaDeposito);
     }
 }
