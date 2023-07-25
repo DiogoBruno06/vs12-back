@@ -2,11 +2,13 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
         List<Contato> contatos = new ArrayList<>();
         List<Endereco> enderecos = new ArrayList<>();
         Contato contato1 = new Contato("Contato para diogo","986060610",1);
@@ -53,22 +55,18 @@ public class Main {
         System.out.println("\n");
         System.out.printf("O saldo restante é: %.2f",contaCorrente2.getSaldo());
 
-        contaPagamento.sacar(-1);
-        System.out.println("\n");
+        contaPagamento.sacar(1200.00);
         contaPagamento.getSaldo();
         contaPagamento.transferir(contaCorrente2,200);
 
-        contaPagamento.depositar(250);
-        contaPagamento.sacar(200);
-        contaPagamento.transferir(contaCorrente2,200);
+        //contaPagamento.depositar(250);
+        // contaPagamento.sacar(200);
+        //contaPagamento.transferir(contaCorrente2,200);
 
 
-        contaCorrente2.imprimir();
-        contaPoupanca.imprimir();
-        contaPagamento.imprimir();
-
-
-
+       // contaCorrente2.imprimir();
+        //contaPoupanca.imprimir();
+        //contaPagamento.imprimir();
 
 
     }
