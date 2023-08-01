@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "8343dbd5-31a3-4c85-8730-80335241a6fb",
+		"name": "PessoaAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26489464"
+	},
+	"item": [
+		{
+			"name": "TASK02",
+			"item": [
+				{
+					"name": "lOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\" : \"admin\",\r\n    \"senha\" : \"123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/auth",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pessoa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterando Email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Caren Wyman Jones\",\r\n     \"dataNascimento\": \"1995-05-05\",\r\n    \"cpf\": \"54823006331\",\r\n    \"email\": \"novoemail.mcglynn@hotmail.com\",\r\n    \"idPessoa\": 10563\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa/10563",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"pessoa",
+								"10563"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inserindo Pessoa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Diogo Bruno\",\r\n     \"dataNascimento\": \"2004-10d-06\",\r\n    \"cpf\": \"54823006331\",\r\n    \"email\": \"diogo.neves@dbccompany.com.br\",\r\n    \"idPessoa\": 10563\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa/23620",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"pessoa",
+								"23620"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Removendo Pessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa/23620",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"pessoa",
+								"23620"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos Contatos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Contato Por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato/9959",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"contato",
+								"9959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionando Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPessoa\": 9959,\r\n  \"tipoContato\": \"RESIDENCIAL\",\r\n  \"telefone\": \"(54)91234-1232\",\r\n  \"descricao\": \"numero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato/9959",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"contato",
+								"9959"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editando Contato",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"idPessoa\": 0,\r\n  \"tipoContato\": \"RESIDENCIAL\",\r\n  \"telefone\": \"(54)91234-1232\",\r\n  \"descricao\": \"whatsapp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato/1793",
+							"protocol": "http",
+							"host": [
+								"vemser-hml",
+								"dbccompany",
+								"com",
+								"br"
+							],
+							"port": "39000",
+							"path": [
+								"vemser",
+								"dbc-pessoa-api",
+								"contato",
+								"1793"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Remover Contato",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato/1793",
+					"protocol": "http",
+					"host": [
+						"vemser-hml",
+						"dbccompany",
+						"com",
+						"br"
+					],
+					"port": "39000",
+					"path": [
+						"vemser",
+						"dbc-pessoa-api",
+						"contato",
+						"1793"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
