@@ -37,8 +37,8 @@ public class ContatoService {
         contatoRepository.delete(contatoRecuperada);
     }
 
-    public List<Contato> listById(Integer id) {
-        return contatoRepository.listById(id);
+    public List<Contato> listById(Integer idContato) {
+        return contatoRepository.listById(idContato);
     }
 
     private Contato getContato(Integer id) throws Exception {

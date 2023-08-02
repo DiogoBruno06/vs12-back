@@ -3,6 +3,8 @@ package br.com.dbc.vemser.pessoaapi.repository;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,13 +48,11 @@ public class ContatoRepository {
         contatoAtualizar.setDescricao(contatoAtualizar.getDescricao());
         return contatoAtualizar;
     }
-
     public List<Contato> listById(Integer id) {
         return listaContatos.stream()
                 .filter(contato -> contato.getIdContato().equals(id))
                 .collect(Collectors.toList());
     }
-
 }
 
 

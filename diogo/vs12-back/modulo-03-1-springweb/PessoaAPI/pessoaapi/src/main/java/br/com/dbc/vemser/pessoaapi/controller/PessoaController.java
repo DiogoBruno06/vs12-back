@@ -16,38 +16,38 @@ public class PessoaController {
         pessoaService = new PessoaService();
     }
 
-    @GetMapping("/hello") // GET localhost:8080/pessoa/hello
+    @GetMapping("/hello")
     public String hello() {
         return "Hello world!";
     }
 
-    @GetMapping("/hello-2") // GET localhost:8080/pessoa/hello-2
+    @GetMapping("/hello-2")
     public String hello2() {
         return "Hello world 2!";
     }
 
-    @GetMapping // GET localhost:8080/pessoa
+    @GetMapping
     public List<Pessoa> list() {
         return pessoaService.list();
     }
 
-    @GetMapping("/byname") // GET localhost:8080/pessoa/byname?nome=Rafa
+    @GetMapping("/byname")
     public List<Pessoa> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
     }
 
-    @PostMapping // POST localhost:8080/pessoa
+    @PostMapping
     public Pessoa create(@RequestBody Pessoa pessoa) {
         return pessoaService.create(pessoa);
     }
 
-    @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
+    @PutMapping("/{idPessoa}")
     public Pessoa update(@PathVariable("idPessoa") Integer id,
                          @RequestBody Pessoa pessoaAtualizar) throws Exception {
         return pessoaService.update(id, pessoaAtualizar);
     }
 
-    @DeleteMapping("/{idPessoa}") // DELETE localhost:8080/pessoa/10
+    @DeleteMapping("/{idPessoa}")
     public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
     }
