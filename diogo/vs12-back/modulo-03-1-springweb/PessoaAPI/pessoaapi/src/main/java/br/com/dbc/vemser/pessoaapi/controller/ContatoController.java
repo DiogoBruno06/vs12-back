@@ -9,10 +9,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/contato")
 public class ContatoController {
-    private ContatoService contatoService;
+    private final ContatoService contatoService;
 
-    public ContatoController() {
-       contatoService = new ContatoService();
+    public ContatoController(ContatoService contatoService) {
+       this.contatoService = contatoService;
     }
 
     @GetMapping
@@ -21,13 +21,13 @@ public class ContatoController {
     }
 
     @GetMapping("/byid")
-    public List<Contato> listById(@RequestParam("id") Integer id) {
-        return contatoService.listById(id);
+    public List<Contato> listById(@RequestParam("idPessoa") Integer idPessoa) {
+        return contatoService.listById(idPessoa);
     }
 
     @PostMapping
-    public Contato create(@RequestBody Contato contato) {
-        return contatoService.create(contato);
+    public Contato create(@PathVariable("idPessoa") Integer idPessoa,@RequestBody Contato contato) throws Exception {
+        return contatoService.create(idPessoa,contato);
     }
 
     @PutMapping("/{idContato}")
@@ -37,7 +37,7 @@ public class ContatoController {
     }
 
     @DeleteMapping("/{idContato}")
-    public void delete(@PathVariable("idContato") Integer id) throws Exception {
+    public void delete(@PathVariable("idContato") Long id) throws Exception {
         contatoService.delete(id);
     }
 

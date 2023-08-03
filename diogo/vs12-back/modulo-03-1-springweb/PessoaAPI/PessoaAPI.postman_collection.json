@@ -62,42 +62,36 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/pessoa",
-							"protocol": "http",
+							"raw": "localhost:8080/contato/byid?idPessoa=2",
 							"host": [
-								"vemser-hml",
-								"dbccompany",
-								"com",
-								"br"
+								"localhost"
 							],
-							"port": "39000",
+							"port": "8080",
 							"path": [
-								"vemser",
-								"dbc-pessoa-api",
-								"pessoa"
+								"contato",
+								"byid"
+							],
+							"query": [
+								{
+									"key": "idPessoa",
+									"value": "2"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Alterando Email",
+					"name": "Alterando",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX0FETUlOIiwiUk9MRV9VU1VBUklPIiwiUk9MRV9NQVJLRVRJTkciXSwiaWF0IjoxNjkwOTA5MjU1LCJleHAiOjE2OTA5OTU2NTV9.9ut-MB7CG9tdwK5fcbNEoEIiDeM_-YOziwYguBuC29w",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Caren Wyman Jones\",\r\n     \"dataNascimento\": \"1995-05-05\",\r\n    \"cpf\": \"54823006331\",\r\n    \"email\": \"novoemail.mcglynn@hotmail.com\",\r\n    \"idPessoa\": 10563\r\n}",
+							"raw": "{\r\n        \"nome\": \"Diogo\",\r\n        \"dataNascimento\": \"2004-10-06\",\r\n        \"cpf\": \"12345678917\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -105,13 +99,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pessoa",
+							"raw": "localhost:8080/pessoa/5",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"pessoa"
+								"pessoa",
+								"5"
 							]
 						}
 					},
@@ -134,7 +129,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nome\": \"DiEgo\",\r\n        \"dataNascimento\": \"2001-11-17\",\r\n        \"cpf\": \"12345678915\"\r\n}",
+							"raw": "{\r\n        \"nome\": \"Diego\",\r\n        \"dataNascimento\": \"\",\r\n        \"cpf\": \"12345678915\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,18 +192,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato",
-							"protocol": "http",
+							"raw": "localhost:8080/contato",
 							"host": [
-								"vemser-hml",
-								"dbccompany",
-								"com",
-								"br"
+								"localhost"
 							],
-							"port": "39000",
+							"port": "8080",
 							"path": [
-								"vemser",
-								"dbc-pessoa-api",
 								"contato"
 							]
 						}
@@ -272,7 +261,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idContato\" : \"6\",\r\n  \"idPessoa\" : \"2\",\r\n  \"tipoContato\" : \"COMERCIAL\",\r\n  \"numero\" : \"998654954\",\r\n  \"descricao\" : \"Contato para Charles\"\r\n}",
+							"raw": "{\r\n  \"idPessoa\" : \"2\",\r\n  \"tipoContato\" : \"COMERCIAL\",\r\n  \"numero\" : \"998654954\",\r\n  \"descricao\" : \"Contato para Charles\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,32 +286,19 @@
 					"name": "Remover Contato",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ2ZW1zZXItYXBpIiwianRpIjoiMiIsImNhcmdvcyI6WyJST0xFX01BUktFVElORyIsIlJPTEVfVVNVQVJJTyIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjkwODYwMzkxLCJleHAiOjE2OTA5NDY3OTF9.PhDKZKBIHofIHP4MW-L6ZSt__EIVyjt5jvG4577D1U4",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://vemser-hml.dbccompany.com.br:39000/vemser/dbc-pessoa-api/contato/1745",
-							"protocol": "http",
+							"raw": "localhost:8080/contato/1",
 							"host": [
-								"vemser-hml",
-								"dbccompany",
-								"com",
-								"br"
+								"localhost"
 							],
-							"port": "39000",
+							"port": "8080",
 							"path": [
-								"vemser",
-								"dbc-pessoa-api",
 								"contato",
-								"1745"
+								"1"
 							]
 						}
 					},
@@ -338,7 +314,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idContato\" : \"3\",\r\n    \"idPessoa\" : 1,\r\n    \"tipoContato\" : \"COMERCIAL\",\r\n    \"numero\" : \"986060612\",\r\n    \"descricao\" : \"Contato para Breno\"\r\n}",
+							"raw": "{\r\n    \"idPessoa\" : 1,\r\n    \"tipoContato\" : \"COMERCIAL\",\r\n    \"numero\" : \"986060612\",\r\n    \"descricao\" : \"Contato para Breno\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -353,6 +329,155 @@
 							"port": "8080",
 							"path": [
 								"contato"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/endereco",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por idPessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/endereco/byid?idPessoa=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"byid"
+							],
+							"query": [
+								{
+									"key": "idPessoa",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por idEndereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/endereco/byid?id=4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"byid"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idPessoa\" : 1,\r\n    \"tipo\" : \"COMERCIAL\",\r\n    \"logradouro\" : \"Avenida 04\",\r\n    \"numero\" : 19,\r\n    \"complemento\" : \"Perto do mangai\",\r\n    \"cep\" : \"58038267\",\r\n    \"cidade\" : \"joao pessoa\",\r\n    \"estado\" : \"pb\",\r\n    \"pais\" : \"brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/endereco/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"complemento\" : \"perto do mangai\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/endereco/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/endereco/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"endereco",
+								"1"
 							]
 						}
 					},

@@ -2,18 +2,39 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
+import static java.lang.System.err;
+
+@Service
 public class PessoaService {
 
-    private PessoaRepository pessoaRepository;
+    //@Autowired
+    private final PessoaRepository pessoaRepository;
 
-    public PessoaService() {
-        pessoaRepository = new PessoaRepository();
+    public PessoaService(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
     }
 
     public Pessoa create(Pessoa pessoa) {
+        if (StringUtils.isBlank(pessoa.getNome())){
+            System.out.println("Nome não pode estar em branco");
+            return null;
+        }
+        if (ObjectUtils.isEmpty(pessoa.getDataNascimento())){
+            System.out.println("Não pode inserir uma pessoa sem data de nascimento");
+            return null;
+        }
+        if (StringUtils.isBlank(pessoa.getCpf())){
+            System.out.println("Não pode inserir pessoa sem cpf");
+            return null;
+        }
         return pessoaRepository.create(pessoa);
     }
 
