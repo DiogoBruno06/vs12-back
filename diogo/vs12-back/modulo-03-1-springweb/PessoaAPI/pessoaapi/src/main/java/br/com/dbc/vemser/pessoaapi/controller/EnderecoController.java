@@ -21,12 +21,12 @@ public class EnderecoController {
     }
 
     @GetMapping("/{idEndereco}")
-    public List<Endereco> listByIdEndereco(Integer id) {
-        return enderecoService.listByIdEndereco(id);
+    public List<Endereco> listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) {
+        return enderecoService.listByIdEndereco(idEndereco);
     }
 
     @GetMapping("/{idPessoa}/pessoa")
-    public List<Endereco> listByIdPessoa(@RequestParam("idPessoa") Integer idPessoa) {
+    public List<Endereco> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return enderecoService.listByIdPessoa(idPessoa);
     }
 

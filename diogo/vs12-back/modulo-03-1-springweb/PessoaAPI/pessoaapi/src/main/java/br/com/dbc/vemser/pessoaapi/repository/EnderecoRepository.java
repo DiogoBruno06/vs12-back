@@ -51,8 +51,7 @@ public class EnderecoRepository {
                           Endereco endereco) throws Exception{
         Endereco enderecoAtualizado = enderecoList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
-                .findFirst().orElseThrow(() -> new Exception("Contato não encontrado"));
-        enderecoAtualizado.setIdEndereco(COUNTER.incrementAndGet());
+                .findFirst().orElseThrow(() -> new Exception("Endereco não encontrado"));
         enderecoAtualizado.setTipo(endereco.getTipo());
         enderecoAtualizado.setLogradouro(endereco.getLogradouro());
         enderecoAtualizado.setNumero(endereco.getNumero());
@@ -70,9 +69,9 @@ public class EnderecoRepository {
                 .collect(Collectors.toList());
     }
 
-    public List<Endereco> listByIdEndereco(Integer idPessoa) {
+    public List<Endereco> listByIdEndereco(Integer idEndereco) {
         return enderecoList.stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(idPessoa))
+                .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
                .collect(Collectors.toList());
     }
 }

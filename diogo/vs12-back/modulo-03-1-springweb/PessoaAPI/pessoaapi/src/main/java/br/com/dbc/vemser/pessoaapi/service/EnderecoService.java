@@ -39,11 +39,11 @@ public class EnderecoService {
         return enderecoRepository.list();
     }
 
-    public List<Endereco> listByIdPessoa(Integer idPessoa) {
+    public List<Endereco> listByIdPessoa(Integer idPessoa){
         return enderecoRepository.listByIdPessoa(idPessoa);
     }
 
-    public List<Endereco> listByIdEndereco(Integer id) {
-        return enderecoRepository.listByIdEndereco(id);
+    public List<Endereco> listByIdEndereco(Integer idEndereco) {
+        return enderecoRepository.listByIdEndereco(idEndereco);
     }
 }
