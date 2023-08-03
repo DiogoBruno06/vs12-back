@@ -26,6 +26,9 @@ public class ContatoService {
                .filter(x  -> x.getIdPessoa().equals(idPessoa))
                .findFirst().orElseThrow(() -> new Exception("Pessoa não encontrada"));
        contato.setIdPessoa(pessoa.getIdPessoa());
+       contato.setTipoContato(contato.getTipoContato());
+       contato.setNumero(contato.getNumero());
+       contato.setDescricao(contato.getDescricao());
        return contatoRepository.create(contato);
     }
 

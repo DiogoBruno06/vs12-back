@@ -25,13 +25,13 @@ public class ContatoController {
         return contatoService.listById(idPessoa);
     }
 
-    @PostMapping
+    @PostMapping("/{idPessoa}")
     public Contato create(@PathVariable("idPessoa") Integer idPessoa,@RequestBody Contato contato) throws Exception {
         return contatoService.create(idPessoa,contato);
     }
 
-    @PutMapping("/{idContato}")
-    public Contato update(@PathVariable("idContato") Integer id,
+    @PutMapping("/{idPessoa}")
+    public Contato update(@PathVariable("idPessoa") Integer id,
                          @RequestBody Contato contatoAtualizar) throws Exception {
         return contatoService.update(id, contatoAtualizar);
     }

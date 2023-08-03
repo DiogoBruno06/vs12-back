@@ -52,6 +52,7 @@ public class EnderecoRepository {
         Endereco enderecoAtualizado = enderecoList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
                 .findFirst().orElseThrow(() -> new Exception("Contato não encontrado"));
+        enderecoAtualizado.setIdEndereco(COUNTER.incrementAndGet());
         enderecoAtualizado.setTipo(endereco.getTipo());
         enderecoAtualizado.setLogradouro(endereco.getLogradouro());
         enderecoAtualizado.setNumero(endereco.getNumero());
