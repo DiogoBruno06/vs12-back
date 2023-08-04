@@ -92,7 +92,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nome\": \"Diogo\",\r\n        \"dataNascimento\": \"2004-10-06\",\r\n        \"cpf\": \"12345678917\"\r\n}",
+							"raw": "{\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,14 +100,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/pessoa/5",
+							"raw": "localhost:8080/pessoa/2000",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"pessoa",
-								"5"
+								"2000"
 							]
 						}
 					},
@@ -130,7 +130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nome\": \"Diego\",\r\n        \"dataNascimento\": \"\",\r\n        \"cpf\": \"12345678915\"\r\n}",
+							"raw": "{\r\n        \"nome\": \"1\",\r\n        \"dataNascimento\": \"2024-10-23\",\r\n        \"cpf\": \"12345678911\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -255,7 +255,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"idPessoa\" : \"2\",\r\n  \"tipoContato\" : \"COMERCIAL\",\r\n  \"numero\" : \"998654951\",\r\n  \"descricao\" : \"Contato para Charles\"\r\n}",
+							"raw": "{\r\n  \"idPessoa\" : 2,\r\n  \"tipoContato\" : \"COMERCIAL\",\r\n  \"numero\" : \"998654951\",\r\n  \"descricao\" : \"Contato para Charles\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -285,14 +285,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/contato/1",
+							"raw": "localhost:8080/contato/8",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"contato",
-								"1"
+								"8"
 							]
 						}
 					},
@@ -447,14 +447,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/endereco/1",
+							"raw": "localhost:8080/endereco/4",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"endereco",
-								"1"
+								"4"
 							]
 						}
 					},
