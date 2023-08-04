@@ -4,6 +4,7 @@ import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.entity.TipoEndereco;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class EnderecoRepository {
     public void delete(Long id) throws Exception {
         Endereco endereco = enderecoList.stream()
                 .filter(x -> x.getIdPessoa() == id.longValue())
-                .findFirst().orElseThrow(() -> new Exception("Contato não encontrado"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         enderecoList.remove(endereco);
     }
 
@@ -51,7 +52,7 @@ public class EnderecoRepository {
                           Endereco endereco) throws Exception{
         Endereco enderecoAtualizado = enderecoList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
-                .findFirst().orElseThrow(() -> new Exception("Endereco não encontrado"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Endereco não encontrado"));
         enderecoAtualizado.setTipo(endereco.getTipo());
         enderecoAtualizado.setLogradouro(endereco.getLogradouro());
         enderecoAtualizado.setNumero(endereco.getNumero());

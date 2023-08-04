@@ -1,16 +1,13 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
-import static java.lang.System.err;
 
 @Service
 public class PessoaService {
@@ -23,21 +20,11 @@ public class PessoaService {
     }
 
     public Pessoa create(Pessoa pessoa) {
-        if (StringUtils.isBlank(pessoa.getNome())){
-            System.out.println("Nome não pode estar em branco");
-            return null;
-        }
-        if (ObjectUtils.isEmpty(pessoa.getDataNascimento())){
-            System.out.println("Não pode inserir uma pessoa sem data de nascimento");
-            return null;
-        }
-        if (StringUtils.isBlank(pessoa.getCpf())){
-            System.out.println("Não pode inserir pessoa sem cpf");
-            return null;
+        if (pessoa != null && StringUtils.isEmpty(pessoa.getNome())) {
+
         }
         return pessoaRepository.create(pessoa);
     }
-
     public List<Pessoa> list() {
         return pessoaRepository.list();
     }
@@ -66,7 +53,7 @@ public class PessoaService {
         Pessoa pessoaRecuperada = pessoaRepository.list().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não encontrada!"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada!"));
         return pessoaRecuperada;
     }
 }

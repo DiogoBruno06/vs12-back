@@ -4,6 +4,7 @@ import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.entity.TipoContato;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 
@@ -43,7 +44,7 @@ public class ContatoRepository {
     public void delete(Long id) throws Exception {
         Contato contato = listaContatos.stream()
                 .filter(x -> x.getIdContato() == id.longValue())
-                .findFirst().orElseThrow(() -> new Exception("Contato não encontrado"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         listaContatos.remove(contato);
     }
 
@@ -51,7 +52,7 @@ public class ContatoRepository {
                          Contato contato) throws Exception{
         Contato contatoAtualizado = listaContatos.stream()
                 .filter(x -> x.getIdContato().equals(id))
-                .findFirst().orElseThrow(() -> new Exception("Contato não encontrado"));
+                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         contatoAtualizado.setIdContato(COUNTER.incrementAndGet());
         contatoAtualizado.setIdPessoa(contato.getIdPessoa());
         contatoAtualizado.setTipoContato(contato.getTipoContato());

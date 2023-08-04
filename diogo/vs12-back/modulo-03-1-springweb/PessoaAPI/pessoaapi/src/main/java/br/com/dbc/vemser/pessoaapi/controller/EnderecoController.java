@@ -2,12 +2,17 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 public class EnderecoController {
     private final EnderecoService enderecoService;
 
@@ -30,18 +35,20 @@ public class EnderecoController {
         return enderecoService.listByIdPessoa(idPessoa);
     }
 
-    @PostMapping("/{idPessoa}")
-    public Endereco create(@PathVariable("idPessoa") Integer idPessoa, @RequestBody Endereco endereco) throws Exception {
-        return enderecoService.create(idPessoa, endereco);
+    @PostMapping("/{idEndereco}")
+    public ResponseEntity<Endereco> create(@Valid @PathVariable("idEndereco") Integer idEndereco, @Valid @RequestBody Endereco endereco) throws Exception {
+        return new ResponseEntity<>(enderecoService.create(idEndereco, endereco), HttpStatus.OK);
     }
 
     @PutMapping("/{idEndereco}")
-    public Endereco update(@PathVariable("idEndereco") Integer idEndereco, @RequestBody Endereco enderecoAtualizar) throws Exception {
-        return enderecoService.update(idEndereco, enderecoAtualizar);
+    public ResponseEntity<Endereco> update(@Valid @PathVariable("idEndereco") Integer idEndereco, @Valid @RequestBody Endereco enderecoAtualizar) throws Exception {
+        Endereco enderecoAlterar = enderecoService.update(idEndereco, enderecoAtualizar);
+        return ResponseEntity.ok(enderecoAlterar);
     }
 
     @DeleteMapping("/{idEndereco}")
-    public void delete(@PathVariable("idEndereco") Long id) throws Exception {
+    public ResponseEntity<Void> delete(@PathVariable("idEndereco") @Valid Long id) throws Exception {
         enderecoService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
