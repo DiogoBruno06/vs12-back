@@ -1,7 +1,9 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -13,22 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 @Validated
+@Log4j2
 public class PessoaController {
 
     private final PessoaService pessoaService;
 
     public PessoaController(PessoaService pessoaService) {
         this.pessoaService = pessoaService;
-    }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello world!";
-    }
-
-    @GetMapping("/hello-2")
-    public String hello2() {
-        return "Hello world 2!";
     }
 
     @GetMapping
@@ -42,13 +35,13 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> create(@Valid @RequestBody Pessoa pessoa) {
+    public ResponseEntity<Pessoa> create(@Valid @RequestBody PessoaCreateDTO pessoa) {
        return new ResponseEntity<>(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
     @PutMapping("/{idPessoa}")
     public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id,
-                                         @RequestBody Pessoa pessoaAtualizar) throws Exception {
+                                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
         Pessoa pessoaAlterada = pessoaService.update(id, pessoaAtualizar);
         return ResponseEntity.ok(pessoaAlterada);
     }

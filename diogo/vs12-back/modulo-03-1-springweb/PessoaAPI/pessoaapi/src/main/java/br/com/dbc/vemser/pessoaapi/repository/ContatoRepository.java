@@ -41,15 +41,16 @@ public class ContatoRepository {
         return listaContatos;
     }
 
-    public void delete(Long id) throws Exception {
+    public void delete(Integer id) throws RegraDeNegocioException {
         Contato contato = listaContatos.stream()
-                .filter(x -> x.getIdContato() == id.longValue())
-                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
+                .filter(x -> x.getIdContato() == id.intValue())
+                .findFirst()
+                .orElseThrow(() -> new RegraDeNegocioException("Contato não econtrado"));
         listaContatos.remove(contato);
     }
 
     public Contato update(Integer id,
-                         Contato contato) throws Exception{
+                         Contato contato) throws RegraDeNegocioException{
         Contato contatoAtualizado = listaContatos.stream()
                 .filter(x -> x.getIdContato().equals(id))
                 .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));

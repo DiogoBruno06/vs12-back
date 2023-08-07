@@ -1,8 +1,12 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/contato")
 @Validated
+@Log4j2
 public class ContatoController {
     private final ContatoService contatoService;
 
@@ -31,20 +36,23 @@ public class ContatoController {
         return contatoService.listById(idPessoa);
     }
 
-    @PostMapping("/{idPessoa}")
-    public ResponseEntity<Contato> create(@PathVariable("idPessoa") @Valid Integer idPessoa, @Valid @RequestBody Contato contato) throws Exception {
-        return new ResponseEntity<>(contatoService.create(idPessoa,contato), HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<ContatoCreateDTO> create(@Valid @RequestBody ContatoDTO contato) throws RegraDeNegocioException {
+        log.info("Criando");
+        return new ResponseEntity<>(contatoService.create(contato), HttpStatus.OK);
     }
 
     @PutMapping("/{idContato}")
     public ResponseEntity<Contato> update(@PathVariable("idContato") Integer id,
-                                         @Valid @RequestBody Contato contatoAtualizar) throws Exception {
+                                         @Valid @RequestBody Contato contatoAtualizar) throws RegraDeNegocioException {
+        log.info("Editando");
         Contato contatoAlterado = contatoService.update(id, contatoAtualizar);
         return ResponseEntity.ok(contatoAlterado);
     }
 
     @DeleteMapping("/{idContato}")
-    public ResponseEntity<Void> delete(@PathVariable("idContato") @Valid Long id) throws Exception {
+    public ResponseEntity<Void> delete(@PathVariable("idContato") @Valid Integer id) throws RegraDeNegocioException {
+        log.info("Deletando");
         contatoService.delete(id);
         return ResponseEntity.ok().build();
     }

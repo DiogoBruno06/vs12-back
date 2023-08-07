@@ -1,6 +1,9 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import lombok.Data;
+
 import java.util.Arrays;
+
 
 public enum TipoContato {
     RESIDENCIAL(1),

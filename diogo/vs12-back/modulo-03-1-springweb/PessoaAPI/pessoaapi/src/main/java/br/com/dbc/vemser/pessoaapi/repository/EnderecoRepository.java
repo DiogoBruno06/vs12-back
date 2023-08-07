@@ -41,15 +41,12 @@ public class EnderecoRepository {
         return enderecoList;
     }
 
-    public void delete(Long id) throws Exception {
-        Endereco endereco = enderecoList.stream()
-                .filter(x -> x.getIdPessoa() == id.longValue())
-                .findFirst().orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
+    public void delete(Endereco endereco){
         enderecoList.remove(endereco);
     }
 
     public Endereco update(Integer idEndereco,
-                          Endereco endereco) throws Exception{
+                          Endereco endereco) throws RegraDeNegocioException{
         Endereco enderecoAtualizado = enderecoList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
                 .findFirst().orElseThrow(() -> new RegraDeNegocioException("Endereco não encontrado"));
