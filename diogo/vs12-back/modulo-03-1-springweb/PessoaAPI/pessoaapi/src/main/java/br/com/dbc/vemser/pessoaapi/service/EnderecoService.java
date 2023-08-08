@@ -54,7 +54,7 @@ public class EnderecoService {
         return enderecoDTO;
     }
 
-    public Endereco update(Integer id,Endereco endereco) throws RegraDeNegocioException{
+    public Endereco update(Integer id,EnderecoCreateDTO endereco) throws RegraDeNegocioException{
         return enderecoRepository.update(id,endereco);
     }
 
@@ -75,7 +75,7 @@ public class EnderecoService {
         return enderecoRepository.listByIdEndereco(idEndereco);
     }
 
-    private Endereco getEndereco(Integer id) throws RegraDeNegocioException {
+    public Endereco getEndereco(Integer id) throws RegraDeNegocioException {
         Endereco enderecoRecuperado = enderecoRepository.list().stream()
                 .filter(x -> x.getIdEndereco().equals(id))
                 .findFirst()

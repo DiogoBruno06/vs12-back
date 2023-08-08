@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.repository;
 
+import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
@@ -46,7 +47,7 @@ public class EnderecoRepository {
     }
 
     public Endereco update(Integer idEndereco,
-                          Endereco endereco) throws RegraDeNegocioException{
+                          EnderecoCreateDTO endereco) throws RegraDeNegocioException{
         Endereco enderecoAtualizado = enderecoList.stream()
                 .filter(x -> x.getIdEndereco().equals(idEndereco))
                 .findFirst().orElseThrow(() -> new RegraDeNegocioException("Endereco não encontrado"));

@@ -2,13 +2,16 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
+import br.com.dbc.vemser.pessoaapi.service.EmailService;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -19,6 +22,9 @@ import java.util.List;
 public class PessoaController {
 
     private final PessoaService pessoaService;
+
+    @Autowired
+    private EmailService emailService;
 
     public PessoaController(PessoaService pessoaService) {
         this.pessoaService = pessoaService;
@@ -35,7 +41,8 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<Pessoa> create(@Valid @RequestBody PessoaCreateDTO pessoa) {
+    public ResponseEntity<Pessoa> create(@Valid @RequestBody PessoaCreateDTO pessoa) throws MessagingException {
+        log.info("Criando");
        return new ResponseEntity<>(pessoaService.create(pessoa), HttpStatus.OK);
     }
 

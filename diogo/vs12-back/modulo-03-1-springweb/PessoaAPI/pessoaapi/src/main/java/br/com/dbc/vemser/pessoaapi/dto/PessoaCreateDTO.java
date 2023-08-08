@@ -16,11 +16,10 @@ public class PessoaCreateDTO {
     @NotNull
     private String nome;
 
-    @NotEmpty
-    @Past
+    @NotNull
+    @PastOrPresent
     private LocalDate dataNascimento;
 
-    @CPF
     @NotEmpty
     @NotNull
     private String cpf;

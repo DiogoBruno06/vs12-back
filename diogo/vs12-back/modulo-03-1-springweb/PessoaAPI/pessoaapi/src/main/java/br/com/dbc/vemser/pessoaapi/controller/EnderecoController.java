@@ -3,15 +3,22 @@ package br.com.dbc.vemser.pessoaapi.controller;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Endereco;
+import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.dbc.vemser.pessoaapi.service.EmailService;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
+import br.com.dbc.vemser.pessoaapi.service.PessoaService;
+import freemarker.template.TemplateException;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,8 +28,14 @@ import java.util.List;
 public class EnderecoController {
     private final EnderecoService enderecoService;
 
-    public EnderecoController(EnderecoService enderecoService) {
+    @Autowired
+    private EmailService emailService;
+
+    private final PessoaService pessoaService;
+
+    public EnderecoController(EnderecoService enderecoService, PessoaService pessoaService) {
         this.enderecoService = enderecoService;
+        this.pessoaService = pessoaService;
     }
 
     @GetMapping
@@ -41,22 +54,25 @@ public class EnderecoController {
     }
 
     @PostMapping
-    public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco) throws RegraDeNegocioException {
+    public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco) throws RegraDeNegocioException, TemplateException, IOException, MessagingException {
         log.info("Criando");
+        emailService.EnderecoCriado(pessoaService.getPessoa(endereco.getIdPessoa()),endereco);
         return new ResponseEntity<>(enderecoService.create(endereco), HttpStatus.OK);
     }
 
     @PutMapping("/{idEndereco}")
-    public ResponseEntity<Endereco> update(@Valid @PathVariable("idEndereco") Integer idEndereco, @Valid @RequestBody Endereco enderecoAtualizar) throws Exception {
+    public ResponseEntity<Endereco> update(@Valid @PathVariable("idEndereco") Integer idEndereco, @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         log.info("Editando");
         Endereco enderecoAlterar = enderecoService.update(idEndereco, enderecoAtualizar);
+        emailService.EnderecoEditado(pessoaService.getPessoa(enderecoAtualizar.getIdPessoa()), enderecoAtualizar);
         return ResponseEntity.ok(enderecoAlterar);
     }
 
-    @DeleteMapping("/{idEndereco}")
-    public ResponseEntity<Void> delete(@PathVariable("idEndereco") @Valid Integer id) throws RegraDeNegocioException {
+    @DeleteMapping("/{idPessoa}")
+    public ResponseEntity<Void> delete(@PathVariable("idPessoa") @Valid Integer id, EnderecoCreateDTO idEndereco) throws RegraDeNegocioException, TemplateException, MessagingException, IOException {
         log.info("Deletando");
         enderecoService.delete(id);
+        emailService.EnderecoDeletar(pessoaService.getPessoa(id),id,idEndereco);
         return ResponseEntity.ok().build();
     }
 }

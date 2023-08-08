@@ -45,4 +45,17 @@ public class EnderecoCreateDTO {
 
     @NotNull
     private String pais;
+
+    @Override
+    public String toString() {
+        return "Endereco"+
+                ", Tipo: \n" + tipo +
+                ", Logradouro:" + logradouro + "\n" +
+                ", Número:" + numero +
+                ", Complemento: " + complemento + "\n" +
+                ", \n CEP: " + cep + "\n" +
+                ", Cidade: " + cidade + "\n" +
+                ", Estado: " + estado + "\n" +
+                ", País: " + pais + "\n";
+    }
 }

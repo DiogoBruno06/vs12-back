@@ -6,12 +6,15 @@ import br.com.dbc.vemser.pessoaapi.entity.Contato;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
+import br.com.dbc.vemser.pessoaapi.service.EmailService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -21,6 +24,9 @@ import java.util.List;
 @Log4j2
 public class ContatoController {
     private final ContatoService contatoService;
+
+    @Autowired
+    private EmailService emailService;
 
     public ContatoController(ContatoService contatoService) {
        this.contatoService = contatoService;
@@ -37,7 +43,7 @@ public class ContatoController {
     }
 
     @PostMapping
-    public ResponseEntity<ContatoCreateDTO> create(@Valid @RequestBody ContatoDTO contato) throws RegraDeNegocioException {
+    public ResponseEntity<ContatoCreateDTO> create(@Valid @RequestBody ContatoDTO contato) throws RegraDeNegocioException, MessagingException {
         log.info("Criando");
         return new ResponseEntity<>(contatoService.create(contato), HttpStatus.OK);
     }
@@ -46,6 +52,7 @@ public class ContatoController {
     public ResponseEntity<Contato> update(@PathVariable("idContato") Integer id,
                                          @Valid @RequestBody Contato contatoAtualizar) throws RegraDeNegocioException {
         log.info("Editando");
+
         Contato contatoAlterado = contatoService.update(id, contatoAtualizar);
         return ResponseEntity.ok(contatoAlterado);
     }
