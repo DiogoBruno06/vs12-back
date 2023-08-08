@@ -13,17 +13,17 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContatoCreateDTO{
-    @NotNull
+    @NotNull(message = "idPessoa não pode ser nulo")
     private Integer idPessoa;
 
-    @NotNull
+    @NotNull(message = "Tipo não pode ser nulo")
     private TipoContato tipoContato;
 
-    @NotNull
+    @NotNull(message = "Número não pode ser nulo")
     @Size(max = 13)
     private String numero;
 
-    @NotNull
+    @NotNull(message = "Descrição não pode ser nulo")
     @NotEmpty
     private String descricao;
 }

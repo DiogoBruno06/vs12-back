@@ -14,36 +14,36 @@ import javax.validation.constraints.Size;
 @Data
 public class EnderecoCreateDTO {
 
-    @NotNull
+    @NotNull(message = "idPessoa não pode ser nulo")
     private Integer idPessoa;
 
-    @NotNull
+    @NotNull(message = "Tipo não pode ser nulo")
     private TipoEndereco tipo;
 
-    @NotNull
+    @NotNull(message = "Logradouro não pode ser nulo")
     @NotEmpty
     @Size(min = 1, max = 250)
     private String logradouro;
 
-    @NotNull
+    @NotNull(message = "Número não pode ser nulo")
     private Integer numero;
 
     private String complemento;
 
-    @NotNull
+    @NotNull(message = "CEP não pode ser nulo")
     @NotEmpty
     @Size(min = 1, max = 8)
     private String cep;
 
-    @NotNull
+    @NotNull(message = "Cidade não pode ser nulo")
     @NotEmpty
     @Size(min = 1, max = 250)
     private String cidade;
 
-    @NotNull
+    @NotNull(message = "Estado não pode ser nulo")
     private String estado;
 
-    @NotNull
+    @NotNull(message = "Pais não pode ser nulo")
     private String pais;
 
     @Override

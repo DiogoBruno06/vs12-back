@@ -13,14 +13,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PessoaCreateDTO {
     @NotEmpty
-    @NotNull
+    @NotNull(message = "Nome não pode ser nulo")
     private String nome;
 
-    @NotNull
+    @NotNull(message = "Data de nascimento não pode ser nulo")
     @PastOrPresent
     private LocalDate dataNascimento;
 
     @NotEmpty
-    @NotNull
+    @NotNull(message = "CPF não pode ser nulo")
     private String cpf;
 }
