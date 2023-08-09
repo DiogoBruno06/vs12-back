@@ -1,6 +1,9 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.EnderecoControllerDoc;
+import br.com.dbc.vemser.pessoaapi.documentacao.PessoaControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.service.EmailService;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
@@ -19,7 +22,7 @@ import java.util.List;
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 @Validated
 @Log4j2
-public class PessoaController {
+public class PessoaController implements PessoaControllerDoc {
 
     private final PessoaService pessoaService;
 
@@ -31,7 +34,7 @@ public class PessoaController {
     }
 
     @GetMapping
-    public List<Pessoa> list() {
+    public List<PessoaDTO> list() {
         return pessoaService.list();
     }
 

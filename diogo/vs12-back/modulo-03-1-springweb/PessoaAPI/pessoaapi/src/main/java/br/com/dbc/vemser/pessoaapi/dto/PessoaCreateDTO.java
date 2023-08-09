@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 public class PessoaCreateDTO {
     @NotEmpty
     @NotNull(message = "Nome não pode ser nulo")
+    @Schema(description = "Nome da Pessoa", required = true, example = "Pedro José")
     private String nome;
 
     @NotNull(message = "Data de nascimento não pode ser nulo")

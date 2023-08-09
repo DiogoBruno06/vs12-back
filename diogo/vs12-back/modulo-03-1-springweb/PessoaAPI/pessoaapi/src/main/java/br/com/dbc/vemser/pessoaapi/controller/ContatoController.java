@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.ContatoControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.entity.Contato;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/contato")
 @Validated
 @Log4j2
-public class ContatoController {
+public class ContatoController implements ContatoControllerDoc {
     private final ContatoService contatoService;
 
     @Autowired

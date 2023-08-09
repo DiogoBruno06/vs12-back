@@ -50,6 +50,7 @@ public class EnderecoService {
         enderecoDTO.setLogradouro(endereco1.getLogradouro());
         enderecoDTO.setTipo(endereco1.getTipo());
         enderecoDTO.setIdPessoa(endereco1.getIdPessoa());
+        enderecoDTO.setCidade(endereco1.getCidade());
 
         return enderecoDTO;
     }

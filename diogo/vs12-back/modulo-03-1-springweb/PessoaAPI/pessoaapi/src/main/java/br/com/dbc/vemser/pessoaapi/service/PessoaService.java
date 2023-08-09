@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -38,8 +39,11 @@ public class PessoaService {
 
         return pessoaRepository.create(pessoaUpdate);
     }
-    public List<Pessoa> list() {
-        return pessoaRepository.list();
+    public List<PessoaDTO> list() {
+        return pessoaRepository.list()
+                .stream()
+                .map(pessoa -> objectMapper.convertValue(pessoa, PessoaDTO.class))
+                .collect(Collectors.toList());
     }
 
     public Pessoa update(Integer id,

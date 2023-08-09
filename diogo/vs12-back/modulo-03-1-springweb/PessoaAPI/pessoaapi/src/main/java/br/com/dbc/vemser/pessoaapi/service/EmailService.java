@@ -80,9 +80,9 @@ public class EmailService {
     }
 
     public String getContentFromTemplate(String nome, EnderecoCreateDTO endereco) throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
+        Map<String, String> dados = new HashMap<>();
         dados.put("nome",nome);
-        dados.put("endereco", endereco);
+        dados.put("endereco", String.valueOf(endereco));
         Template template = fmConfiguration.getTemplate("email-template2.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;

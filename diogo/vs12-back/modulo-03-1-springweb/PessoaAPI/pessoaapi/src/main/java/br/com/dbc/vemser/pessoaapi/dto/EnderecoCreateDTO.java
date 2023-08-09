@@ -37,7 +37,6 @@ public class EnderecoCreateDTO {
 
     @NotNull(message = "Cidade não pode ser nulo")
     @NotEmpty
-    @Size(min = 1, max = 250)
     private String cidade;
 
     @NotNull(message = "Estado não pode ser nulo")
