@@ -8,9 +8,12 @@ import br.com.dbc.vemser.pessoaapi.entity.Pessoa;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import freemarker.template.TemplateException;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,14 +23,16 @@ public class EnderecoService {
     private final EnderecoRepository enderecoRepository;
     private final PessoaService pessoaService;
     private final ObjectMapper objectMapper;
+    private final EmailService emailService;
 
-    public EnderecoService(EnderecoRepository enderecoRepository, PessoaService pessoaService, ObjectMapper objectMapper){
+    public EnderecoService(EnderecoRepository enderecoRepository, PessoaService pessoaService, ObjectMapper objectMapper,EmailService emailService){
         this.pessoaService = pessoaService;
         this.enderecoRepository = enderecoRepository;
         this.objectMapper = objectMapper;
+        this.emailService = emailService;
     }
 
-    public EnderecoDTO create(EnderecoCreateDTO endereco) throws RegraDeNegocioException{
+    public EnderecoDTO create(EnderecoCreateDTO endereco) throws RegraDeNegocioException, TemplateException, MessagingException, IOException{
         Endereco entity = objectMapper.convertValue(endereco, Endereco.class);
         entity.setPais(endereco.getPais());
         entity.setEstado(endereco.getEstado());
@@ -52,15 +57,18 @@ public class EnderecoService {
         enderecoDTO.setIdPessoa(endereco1.getIdPessoa());
         enderecoDTO.setCidade(endereco1.getCidade());
 
+        emailService.EnderecoCriado(enderecoDTO.getIdEndereco());
         return enderecoDTO;
     }
 
-    public Endereco update(Integer id,EnderecoCreateDTO endereco) throws RegraDeNegocioException{
+    public Endereco update(Integer id,EnderecoCreateDTO endereco) throws RegraDeNegocioException, TemplateException, MessagingException, IOException{
+        emailService.EnderecoEditado(id);
         return enderecoRepository.update(id,endereco);
     }
 
-    public void delete(Integer id) throws RegraDeNegocioException {
+    public void delete(Integer id) throws RegraDeNegocioException, TemplateException, MessagingException, IOException {
         Endereco enderecoRecuperado = getEndereco(id);
+        emailService.EnderecoDeletar(pessoaService.getPessoa(id),id);
         enderecoRepository.delete(enderecoRecuperado);
     }
 

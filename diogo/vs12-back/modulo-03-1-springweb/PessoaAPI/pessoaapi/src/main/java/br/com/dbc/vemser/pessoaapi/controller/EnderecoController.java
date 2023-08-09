@@ -57,7 +57,6 @@ public class EnderecoController implements EnderecoControllerDoc {
     @PostMapping
     public ResponseEntity<EnderecoDTO> create(@Valid @RequestBody EnderecoCreateDTO endereco) throws RegraDeNegocioException, TemplateException, IOException, MessagingException {
         log.info("Criando");
-        emailService.EnderecoCriado(pessoaService.getPessoa(endereco.getIdPessoa()),endereco);
         return new ResponseEntity<>(enderecoService.create(endereco), HttpStatus.OK);
     }
 
@@ -65,7 +64,6 @@ public class EnderecoController implements EnderecoControllerDoc {
     public ResponseEntity<Endereco> update(@Valid @PathVariable("idEndereco") Integer idEndereco, @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         log.info("Editando");
         Endereco enderecoAlterar = enderecoService.update(idEndereco, enderecoAtualizar);
-        emailService.EnderecoEditado(pessoaService.getPessoa(enderecoAtualizar.getIdPessoa()), enderecoAtualizar);
         return ResponseEntity.ok(enderecoAlterar);
     }
 
@@ -73,7 +71,6 @@ public class EnderecoController implements EnderecoControllerDoc {
     public ResponseEntity<Void> delete(@PathVariable("idPessoa") @Valid Integer id, EnderecoCreateDTO idEndereco) throws RegraDeNegocioException, TemplateException, MessagingException, IOException {
         log.info("Deletando");
         enderecoService.delete(id);
-        emailService.EnderecoDeletar(pessoaService.getPessoa(id),id,idEndereco);
         return ResponseEntity.ok().build();
     }
 }

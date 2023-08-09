@@ -79,20 +79,26 @@ public class EmailService {
         }
     }
 
-    public String getContentFromTemplate(String nome, EnderecoCreateDTO endereco) throws IOException, TemplateException {
-        Map<String, String> dados = new HashMap<>();
-        dados.put("nome",nome);
-        dados.put("endereco", String.valueOf(endereco));
-        Template template = fmConfiguration.getTemplate("email-template2.ftl");
+    public String getContentFromTemplate(Integer id) throws IOException, TemplateException {
+        Map<String, Integer> dados = new HashMap<>();
+        dados.put("id",id);
+        Template template = fmConfiguration.getTemplate("email-templateeditar.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
 
-    public String getContentFromTemplateDelete(String nome,Integer idPessoa, EnderecoCreateDTO endereco) throws IOException, TemplateException {
+    public String getContentFromTemplateCriar(Integer id) throws IOException, TemplateException {
+        Map<String, Integer> dados = new HashMap<>();
+        dados.put("id",id);
+        Template template = fmConfiguration.getTemplate("email-templatecriar.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    public String getContentFromTemplateDelete(String nome,Integer idPessoa) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
         dados.put("nome",nome);
         dados.put("idPessoa",idPessoa);
-        dados.put("endereco", endereco);
         Template template = fmConfiguration.getTemplate("delete-template.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
@@ -100,21 +106,21 @@ public class EmailService {
 
 
 
-    public void EnderecoCriado(Pessoa pessoa, EnderecoCreateDTO endereco) throws TemplateException, IOException, MessagingException {
+    public void EnderecoCriado(Integer id) throws TemplateException, IOException, MessagingException {
         String descricao = "Novo endereco cadastrado";
-        String conteudo = getContentFromTemplate(pessoa.getNome(),endereco);
+        String conteudo = getContentFromTemplateCriar(id);
         sendTemplateEmail(descricao,conteudo);
     }
 
-    public void EnderecoEditado(Pessoa pessoa, EnderecoCreateDTO endereco) throws TemplateException,IOException,MessagingException{
+    public void EnderecoEditado(Integer id) throws TemplateException,IOException,MessagingException{
         String descricao = "Endereco editado";
-        String conteudo = getContentFromTemplate(pessoa.getNome(),endereco);
+        String conteudo = getContentFromTemplate(id);
         sendTemplateEmail(descricao,conteudo);
     }
 
-    public void EnderecoDeletar(Pessoa pessoa,Integer idPessoa, EnderecoCreateDTO endereco) throws TemplateException,IOException,MessagingException{
+    public void EnderecoDeletar(Pessoa pessoa,Integer idPessoa) throws TemplateException,IOException,MessagingException{
         String descricao = "Endereco removido";
-        String conteudo = getContentFromTemplateDelete(pessoa.getNome(),idPessoa,endereco);
+        String conteudo = getContentFromTemplateDelete(pessoa.getNome(),idPessoa);
         sendTemplateEmail(descricao,conteudo);
     }
 
