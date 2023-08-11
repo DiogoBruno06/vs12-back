@@ -1,44 +1,82 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
-import br.com.dbc.vemser.pessoaapi.entity.Contato;
+import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
+import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
+import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
+import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ContatoService {
+
     private final ContatoRepository contatoRepository;
+
+    private final ObjectMapper objectMapper;
+
     private final PessoaService pessoaService;
 
-    public ContatoService(ContatoRepository contatoRepository, PessoaService pessoaService) {
-        this.contatoRepository = contatoRepository;
-        this.pessoaService = pessoaService;
-    }
 
-    public void delete(Long id) throws Exception {
-        contatoRepository.delete(id);
-    }
-
-    public Contato create(Integer idPessoa, Contato contato) throws Exception {
-//        Pessoa pessoa = pessoaService.list().stream()
-//                .filter(x -> x.getIdPessoa().equals(idPessoa))
-//                .findFirst().orElseThrow(() -> new Exception("Pessoa não encontrada"));
-//        contato.setIdPessoa(pessoa.getIdPessoa());
-       // return contatoRepository.create(contato);
-        return null;
-    }
-
-    public Contato update(Integer id,Contato contato) throws Exception {
-        return contatoRepository.update(id, contato);
-    }
+    private final String NOT_FOUND_MESSAGE = "ID do contato nao encontrada";
 
 
-    public List<Contato> list() {
-        return contatoRepository.list();
+    public void delete(Integer id) throws Exception {
+        try {
+            ContatoEntity contatoEntityRecuperado = findById(id);
+            contatoRepository.delete(contatoEntityRecuperado);
+        } catch (EntidadeNaoEncontradaException ex){
+            ex.printStackTrace();
+        }
     }
 
-    public List<Contato> listByIdPessoa(Integer idPessoa) {
-        return contatoRepository.listByIdPessoa(idPessoa);
+    public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws Exception {
+        ContatoEntity contatoEntity = converterDTO(contato);
+        contatoEntity.setIdPessoa(idPessoa);
+        return retornarDTO(contatoRepository.save(contatoEntity));
     }
+
+    public ContatoDTO update(Integer id, ContatoCreateDTO contatoDto) throws Exception {
+        ContatoEntity contatoEntityRecuperado = findById(id);
+
+        contatoEntityRecuperado.setIdContato(contatoDto.getIdPessoa());
+        contatoEntityRecuperado.setNumero(contatoDto.getNumero());
+        contatoEntityRecuperado.setDescricao(contatoDto.getDescricao());
+        contatoEntityRecuperado.setTipoContato(contatoDto.getTipoContato());
+        contatoEntityRecuperado.setIdPessoa(contatoDto.getIdPessoa());
+
+        return retornarDTO(contatoRepository.save(contatoEntityRecuperado));
+    }
+
+
+    public List<ContatoDTO> list() {
+        return contatoRepository.findAll().stream()
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
+    public ContatoEntity findById(Integer id) throws Exception {
+        return contatoRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException(NOT_FOUND_MESSAGE));
+    }
+
+    public ContatoEntity converterDTO(ContatoCreateDTO dto) {
+        return objectMapper.convertValue(dto, ContatoEntity.class);
+    }
+
+    public ContatoDTO retornarDTO(ContatoEntity entity) {
+        return objectMapper.convertValue(entity, ContatoDTO.class);
+    }
+
 }

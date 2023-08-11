@@ -33,16 +33,6 @@ public class PessoaController implements PessoaControllerDoc {
         this.pessoaService = pessoaService;
     }
 
-    @GetMapping("/hello") // GET localhost:8080/pessoa/hello
-    public String hello() {
-        return "Hello WORLD!\n" + " <br>App: " + app + " <br>Usuario: " + usuario;
-    }
-
-    @GetMapping("/hello-2") // GET localhost:8080/pessoa/hello-2
-    public String hello2() {
-        return "Hello world 2!";
-    }
-
     @GetMapping // GET localhost:8080/pessoa
     public ResponseEntity<List<PessoaDTO>> list() {
         return ResponseEntity.ok(pessoaService.list());

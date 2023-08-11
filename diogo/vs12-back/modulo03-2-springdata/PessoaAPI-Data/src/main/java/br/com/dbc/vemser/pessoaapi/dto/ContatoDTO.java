@@ -1,17 +1,12 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ContatoDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ContatoDTO extends ContatoCreateDTO{
     private Integer idContato;
-    private Integer idPessoa;
-    @Size(max = 1)
-    @NotNull
-    private Integer tipoContato;
-    private String numero;
-    private String descricao;
 }
