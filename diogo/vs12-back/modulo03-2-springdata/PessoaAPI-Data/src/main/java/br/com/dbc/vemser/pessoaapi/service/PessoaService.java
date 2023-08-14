@@ -3,9 +3,11 @@ package br.com.dbc.vemser.pessoaapi.service;
 import br.com.dbc.vemser.pessoaapi.client.DadosPessoaisClient;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
+import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class PessoaService {
     private final PessoaRepository pessoaRepository;
     private final ObjectMapper objectMapper;
     private final DadosPessoaisClient dadosPessoaisClient;
+    private final ContatoRepository contatoRepository;
 
     private final String NOT_FOUND_MESSAGE = "ID da pessoa nao encontrada";
 
@@ -78,11 +81,23 @@ public class PessoaService {
                 .collect(Collectors.toList());
     }
 
+
     public PessoaEntity converterDTO(PessoaCreateDTO dto) {
         return objectMapper.convertValue(dto, PessoaEntity.class);
+    }
+
+    public List<PessoaEntity> listarPessoasContatos() {
+        return pessoaRepository.findAllWithContatos();
+    }
+
+    public List<PessoaEntity> listarPessoasPets() {
+        return pessoaRepository.findAllWithPet();
     }
 
     public PessoaDTO retornarDTO(PessoaEntity entity) {
         return objectMapper.convertValue(entity, PessoaDTO.class);
     }
+
+
 }
+

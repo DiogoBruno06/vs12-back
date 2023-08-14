@@ -12,25 +12,21 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "CONTATO")
-public class ContatoEntity {
+@Entity(name = "PET")
+public class PetEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CONTATO_SEQ")
-    @SequenceGenerator(name = "CONTATO_SEQ", sequenceName = "seq_contato", allocationSize = 1)
-    @Column(name = "id_contato")
-    private Integer idContato;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PET")
+    @SequenceGenerator(name = "SEQ_PET", sequenceName = "seq_pet2", allocationSize = 1)
+    @Column(name = "ID_PET")
+    private Integer idPet;
 
+    @Column(name = "NOME")
+    private String nome;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
-    private TipoContato tipoContato;
-
-    @Column(name = "numero")
-    private String numero;
-
-    @Column(name = "descricao")
-    private String descricao;
+    private TipoPet tipoPet;
 
     @JsonIgnore
     @ManyToOne

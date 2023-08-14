@@ -1,9 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
-import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.dto.*;
 import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
@@ -24,6 +21,7 @@ public class EnderecoService {
 
     private final EnderecoRepository enderecoRepository;
     private final ObjectMapper objectMapper;
+    private final PessoaService pessoaService;
 
     private final String NOT_FOUND_MESSAGE = "ID da pessoa nao encontrada";
     public void delete(Integer id) throws Exception {
@@ -35,9 +33,9 @@ public class EnderecoService {
         }
     }
 
-    public EnderecoDTO create(EnderecoCreateDTO enderecoEntity) {
-        EnderecoEntity enderecoConverterEntity = converterDTO(enderecoEntity);
-        return retornarDTO(enderecoRepository.save(enderecoConverterEntity));
+    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception {
+        EnderecoEntity enderecoEntity = converterDTO(endereco);
+        return retornarDTO(enderecoRepository.save(enderecoEntity));
     }
 
     public EnderecoDTO update(Integer id, EnderecoCreateDTO enderecoDTO) throws Exception {

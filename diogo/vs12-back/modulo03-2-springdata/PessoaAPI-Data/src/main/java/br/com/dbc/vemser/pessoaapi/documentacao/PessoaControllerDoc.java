@@ -28,7 +28,18 @@ public interface PessoaControllerDoc {
     @GetMapping // GET localhost:8080/pessoa
     public ResponseEntity<List<PessoaDTO>> list();
 
-    @Operation(summary = "Cria a pessoa", description = "Cria uma pessoa")
+    @Operation(summary = "Busca Contatos", description = "Busca contato na pessoa")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas com contatos"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/{idPessoa}")
+    List<PessoaEntity> listarPessoasComContatos(@PathVariable("idPessoa") Integer idPessoa);
+
+    @Operation(summary = "Busca Pets", description = "Busca pets na pessoa")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Retorna a lista de pessoas"),
@@ -36,7 +47,7 @@ public interface PessoaControllerDoc {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @PostMapping // POST localhost:8080/pessoa
-    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoa);
+    @GetMapping("/{id}")
+    List<PessoaEntity> listarPessoasPets(@PathVariable("id") Integer id);
 
 }

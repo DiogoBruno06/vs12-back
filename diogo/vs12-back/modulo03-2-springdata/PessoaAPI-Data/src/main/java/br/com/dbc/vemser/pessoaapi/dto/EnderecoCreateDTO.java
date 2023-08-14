@@ -1,21 +1,22 @@
 package br.com.dbc.vemser.pessoaapi.dto;
 
+import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.entity.TipoEndereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class EnderecoCreateDTO {
-
-    @NotNull(message = "idPessoa não pode ser nulo")
-    private Integer idPessoa;
 
     @NotNull(message = "Tipo não pode ser nulo")
     private TipoEndereco tipo;

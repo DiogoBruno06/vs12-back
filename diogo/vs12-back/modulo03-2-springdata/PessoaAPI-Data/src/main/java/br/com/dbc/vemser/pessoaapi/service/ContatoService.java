@@ -43,18 +43,17 @@ public class ContatoService {
 
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws Exception {
         ContatoEntity contatoEntity = converterDTO(contato);
-        contatoEntity.setIdPessoa(idPessoa);
+        PessoaEntity pessoaEntity = pessoaService.findById(idPessoa);
+        contatoEntity.setPessoaEntity(pessoaEntity);
         return retornarDTO(contatoRepository.save(contatoEntity));
     }
 
     public ContatoDTO update(Integer id, ContatoCreateDTO contatoDto) throws Exception {
         ContatoEntity contatoEntityRecuperado = findById(id);
 
-        contatoEntityRecuperado.setIdContato(contatoDto.getIdPessoa());
         contatoEntityRecuperado.setNumero(contatoDto.getNumero());
         contatoEntityRecuperado.setDescricao(contatoDto.getDescricao());
         contatoEntityRecuperado.setTipoContato(contatoDto.getTipoContato());
-        contatoEntityRecuperado.setIdPessoa(contatoDto.getIdPessoa());
 
         return retornarDTO(contatoRepository.save(contatoEntityRecuperado));
     }

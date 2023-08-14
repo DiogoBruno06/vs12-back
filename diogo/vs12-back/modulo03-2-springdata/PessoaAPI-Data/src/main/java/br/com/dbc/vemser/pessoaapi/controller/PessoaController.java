@@ -61,4 +61,13 @@ public class PessoaController implements PessoaControllerDoc {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/pessoas/pets/{idPessoa}")
+    public List<PessoaEntity> listarPessoasPets(@PathVariable("idPessoa") Integer idPessoa) {
+        return pessoaService.listarPessoasPets();
+    }
+
+    @GetMapping("/pessoas/contatos/{idPessoa}")
+    public List<PessoaEntity> listarPessoasComContatos(@PathVariable("idPessoa") Integer idPessoa) {
+        return pessoaService.listarPessoasContatos();
+    }
 }

@@ -1,26 +1,28 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity(name = "ENDERECO")
+@Entity(name = "ENDERECO_PESSOA")
 public class EnderecoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQ")
-    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco2", allocationSize = 1)
+    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco_contato", allocationSize = 1)
     @Column(name = "id_endereco")
     private Integer idEndereco;
 
-    @Column(name = "id_pessoa")
-    private Integer idPessoa;
-
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo")
     private TipoEndereco tipo;
 
@@ -44,5 +46,8 @@ public class EnderecoEntity {
 
     @Column(name = "pais")
     private String pais;
+
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<PessoaEntity> pessoas;
 
 }

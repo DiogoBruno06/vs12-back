@@ -12,11 +12,12 @@ import javax.persistence.ManyToOne;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContatoDTO extends ContatoCreateDTO{
-    private Integer idContato;
+public class PetDTO extends PetCreateDTO{
+
+    private Integer idPet;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "ID_PESSOA")
-    private PessoaEntity pessoaContato;
+    private PessoaEntity pessoaPet;
 }
