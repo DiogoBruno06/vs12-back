@@ -4,6 +4,8 @@ import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.EnderecoQueryDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,11 @@ public class EnderecoController {
 
     @GetMapping("/{idEndereco}")
     public EnderecoEntity findById(@PathVariable("idEndereco") Integer id) throws Exception {
-        return enderecoService.findById(id);
+        return enderecoService.findByIdPessoa(id);
+    }
+
+    @GetMapping("/query-endereco")
+    public List<EnderecoQueryDTO> getDados() {
+        return enderecoService.findAllByCep();
     }
 }

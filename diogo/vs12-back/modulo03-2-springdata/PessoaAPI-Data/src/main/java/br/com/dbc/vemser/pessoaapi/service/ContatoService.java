@@ -4,6 +4,8 @@ import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.ContatoQueryDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PetQueryDTO;
 import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
@@ -70,6 +72,10 @@ public class ContatoService {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(NOT_FOUND_MESSAGE));
     }
 
+    public List<ContatoQueryDTO> getAllByNumero() {
+        return contatoRepository.findAllByNumero();
+    }
+
     public ContatoEntity converterDTO(ContatoCreateDTO dto) {
         return objectMapper.convertValue(dto, ContatoEntity.class);
     }
@@ -77,5 +83,7 @@ public class ContatoService {
     public ContatoDTO retornarDTO(ContatoEntity entity) {
         return objectMapper.convertValue(entity, ContatoDTO.class);
     }
+
+
 
 }

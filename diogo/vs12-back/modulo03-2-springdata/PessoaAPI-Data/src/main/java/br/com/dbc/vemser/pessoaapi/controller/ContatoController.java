@@ -3,6 +3,8 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.ContatoQueryDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
@@ -48,5 +50,10 @@ public class ContatoController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) throws Exception {
         contatoService.delete(id);
+    }
+
+    @GetMapping("/query-contato")
+    public List<ContatoQueryDTO> getNumero() {
+        return contatoService.getAllByNumero();
     }
 }

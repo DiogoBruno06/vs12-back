@@ -16,6 +16,12 @@ public class PessoaDTO extends PessoaCreateDTO {
     private Integer idPessoa;
 
     private Set<ContatoCreateDTO> contatos;
-    private Set<EnderecoCreateDTO> enderecos;
+    @ManyToMany
+    @JoinTable(name = "Pessoa_X_Pessoa_Endereco",
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO")
+    )
+    private Set<EnderecoDTO> enderecos;
+
     private Set<PetCreateDTO> pets;
 }

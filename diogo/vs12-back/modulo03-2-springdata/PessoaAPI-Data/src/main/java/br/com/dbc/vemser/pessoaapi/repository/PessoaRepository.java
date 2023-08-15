@@ -1,8 +1,8 @@
 package br.com.dbc.vemser.pessoaapi.repository;
 
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
-import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
+import feign.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
 
-    @Query("SELECT DISTINCT p FROM PESSOA p JOIN FETCH p.contato")
-    List<PessoaEntity> findAllWithContatos();
+    @Query("SELECT p FROM PESSOA p WHERE (:idPessoa IS NULL OR p.idPessoa = :idPessoa)")
+    List<PessoaEntity> findAllComOptional(@Param("idPessoa") Integer idPessoa);
 
-    @Query("SELECT DISTINCT p FROM PESSOA p JOIN FETCH p.pet")
-    List<PessoaEntity> findAllWithPet();
+    @Query("SELECT NEW br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO(p.idPessoa, p.nome, p.email) FROM PESSOA p")
+    List<PessoaEmailDTO> findAllPessoaEmailDTO();
 }
 

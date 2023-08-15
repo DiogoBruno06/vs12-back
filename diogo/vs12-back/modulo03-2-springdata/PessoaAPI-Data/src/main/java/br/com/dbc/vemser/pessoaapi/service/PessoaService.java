@@ -3,7 +3,7 @@ package br.com.dbc.vemser.pessoaapi.service;
 import br.com.dbc.vemser.pessoaapi.client.DadosPessoaisClient;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
@@ -31,11 +31,6 @@ public class PessoaService {
         return retornarDTO(pessoaRepository.save(pessoaEntity));
     }
 
-    public List<PessoaDTO> list() {
-        return pessoaRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
 
     public PessoaEntity findById(Integer id) throws RegraDeNegocioException {
         PessoaEntity entity = pessoaRepository.findById(id)
@@ -81,23 +76,31 @@ public class PessoaService {
                 .collect(Collectors.toList());
     }
 
+    public List<PessoaEntity> getAllPessoas(Integer idPessoa) {
+        if (idPessoa != null) {
+            return pessoaRepository.findAllComOptional(idPessoa);
+        } else {
+            return pessoaRepository.findAll();
+        }
+    }
+
 
     public PessoaEntity converterDTO(PessoaCreateDTO dto) {
         return objectMapper.convertValue(dto, PessoaEntity.class);
     }
 
-    public List<PessoaEntity> listarPessoasContatos() {
-        return pessoaRepository.findAllWithContatos();
-    }
-
-    public List<PessoaEntity> listarPessoasPets() {
-        return pessoaRepository.findAllWithPet();
-    }
 
     public PessoaDTO retornarDTO(PessoaEntity entity) {
         return objectMapper.convertValue(entity, PessoaDTO.class);
     }
 
+    public List<PessoaEntity> findAll() {
+        return pessoaRepository.findAll();
+    }
+
+    public List<PessoaEmailDTO> findAllPessoaEmailDTO() {
+        return pessoaRepository.findAllPessoaEmailDTO();
+    }
 
 }
 

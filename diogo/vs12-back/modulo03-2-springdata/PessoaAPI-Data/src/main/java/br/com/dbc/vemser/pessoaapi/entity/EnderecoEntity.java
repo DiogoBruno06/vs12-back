@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -46,6 +47,8 @@ public class EnderecoEntity {
 
     @Column(name = "pais")
     private String pais;
+
+    private Integer idPessoa;
 
     @ManyToMany(mappedBy = "enderecos")
     private Set<PessoaEntity> pessoas;

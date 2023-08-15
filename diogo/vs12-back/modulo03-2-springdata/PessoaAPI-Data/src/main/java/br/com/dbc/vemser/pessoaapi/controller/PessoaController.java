@@ -1,8 +1,8 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.documentacao.PessoaControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
-public class PessoaController implements PessoaControllerDoc {
+public class PessoaController{
 
     // Modelo ANTIGO de Injeção
     // @Autowired
@@ -33,10 +33,6 @@ public class PessoaController implements PessoaControllerDoc {
         this.pessoaService = pessoaService;
     }
 
-    @GetMapping // GET localhost:8080/pessoa
-    public ResponseEntity<List<PessoaDTO>> list() {
-        return ResponseEntity.ok(pessoaService.list());
-    }
 
     @GetMapping("/byname") // GET localhost:8080/pessoa/byname?nome=Rafa
     public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
@@ -61,13 +57,14 @@ public class PessoaController implements PessoaControllerDoc {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/pessoas/pets/{idPessoa}")
-    public List<PessoaEntity> listarPessoasPets(@PathVariable("idPessoa") Integer idPessoa) {
-        return pessoaService.listarPessoasPets();
+
+    @GetMapping("/pessoa-completo")
+    public List<PessoaEntity> getAllPessoas(@RequestParam(name = "idPessoa", required = false) Integer idPessoa) {
+        return pessoaService.getAllPessoas(idPessoa);
     }
 
-    @GetMapping("/pessoas/contatos/{idPessoa}")
-    public List<PessoaEntity> listarPessoasComContatos(@PathVariable("idPessoa") Integer idPessoa) {
-        return pessoaService.listarPessoasContatos();
+    @GetMapping("/query-pessoa")
+    public List<PessoaEmailDTO> getDados() {
+        return pessoaService.findAllPessoaEmailDTO();
     }
 }

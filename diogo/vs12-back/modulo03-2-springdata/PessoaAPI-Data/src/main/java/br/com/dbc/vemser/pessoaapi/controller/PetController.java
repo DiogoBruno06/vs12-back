@@ -1,13 +1,8 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 
-import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PetCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
-import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
-import br.com.dbc.vemser.pessoaapi.entity.PetEntity;
+import br.com.dbc.vemser.pessoaapi.dto.*;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PetQueryDTO;
 import br.com.dbc.vemser.pessoaapi.service.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,9 +35,15 @@ public class PetController {
         return petService.update(id, petCreateDTO);
     }
 
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) throws Exception {
         petService.delete(id);
+    }
+
+    @GetMapping("/query-PET")
+    public List<PetQueryDTO> petQuery() {
+        return petService.getAllPetNames();
     }
 
 }

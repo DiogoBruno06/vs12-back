@@ -1,10 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
-import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PetCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.dbc.vemser.pessoaapi.dto.*;
+import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PetQueryDTO;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PetEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
@@ -56,6 +53,10 @@ public class PetService {
         return petRepository.findAll().stream()
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
+    }
+
+    public List<PetQueryDTO> getAllPetNames() {
+        return petRepository.findAllPetNames();
     }
 
 

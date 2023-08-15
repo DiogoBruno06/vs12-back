@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -49,6 +50,7 @@ public class PessoaEntity {
 
     @OneToMany(mappedBy = "pessoaEntity", cascade = CascadeType.ALL)
     private Set<PetEntity> pet;
+
 
 
 
