@@ -14,7 +14,7 @@ public class ProfessorPK implements Serializable {
 
     @Column(name = "id_professor")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROFESSOR_SEQ")
-    @SequenceGenerator(name = "PROFESSOR_SEQ", sequenceName = "seq_professor2", allocationSize = 1)
+    @SequenceGenerator(name = "PROFESSOR_SEQ", sequenceName = "seq_professor", allocationSize = 1)
     private Integer idProfessor;
 
     @Column(name = "id_universidade")

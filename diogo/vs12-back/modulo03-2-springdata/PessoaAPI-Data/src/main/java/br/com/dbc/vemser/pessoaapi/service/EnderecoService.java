@@ -9,13 +9,13 @@ import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
+import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +26,7 @@ public class EnderecoService {
     private final ObjectMapper objectMapper;
     private final PessoaService pessoaService;
     private final EmailService emailService;
+    private final PessoaRepository pessoaRepository;
 
     private final String NOT_FOUND_MESSAGE = "ID da pessoa nao encontrada";
     public void delete(Integer id) throws Exception {
@@ -38,9 +39,11 @@ public class EnderecoService {
         }
     }
 
-    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception {
+    public EnderecoDTO create(Integer idPessoa,EnderecoCreateDTO endereco) throws Exception {
         EnderecoEntity enderecoEntity = converterDTO(endereco);
-        enderecoEntity.setIdPessoa(idPessoa);
+        PessoaEntity pessoaEntity = pessoaService.findById(idPessoa);
+        pessoaEntity.getEnderecos().add(enderecoEntity);
+        pessoaRepository.save(pessoaEntity);
         emailService.EnderecoCriado(enderecoEntity.getIdEndereco());
         return retornarDTO(enderecoRepository.save(enderecoEntity));
     }

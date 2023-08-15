@@ -16,10 +16,8 @@ import java.util.Set;
 public class EnderecoDTO extends EnderecoCreateDTO{
     private Integer idEndereco;
 
-    private Integer idPessoa;
-
-
-    @ManyToOne
-    private Set<PessoaDTO> pessoas;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "enderecos")
+    private Set<PessoaEntity> pessoas;
 }
 

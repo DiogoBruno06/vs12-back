@@ -37,7 +37,7 @@ public class PessoaEntity {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Pessoa_X_Pessoa_Endereco",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO")

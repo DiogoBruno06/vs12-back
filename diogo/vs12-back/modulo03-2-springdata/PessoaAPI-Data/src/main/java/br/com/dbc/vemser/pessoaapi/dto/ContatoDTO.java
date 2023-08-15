@@ -2,16 +2,15 @@ package br.com.dbc.vemser.pessoaapi.dto;
 
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ContatoDTO extends ContatoCreateDTO{
     private Integer idContato;
 

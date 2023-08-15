@@ -19,7 +19,7 @@ public class EnderecoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQ")
-    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco_contato", allocationSize = 1)
+    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco", allocationSize = 1)
     @Column(name = "id_endereco")
     private Integer idEndereco;
 
@@ -48,8 +48,7 @@ public class EnderecoEntity {
     @Column(name = "pais")
     private String pais;
 
-    private Integer idPessoa;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "enderecos")
     private Set<PessoaEntity> pessoas;
 

@@ -29,7 +29,7 @@ public class EnderecoController {
     @PostMapping("/{idPessoa}")
     public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer idPessoa,
                                              @RequestBody EnderecoCreateDTO endereco) throws Exception {
-        return new ResponseEntity<>(enderecoService.create(idPessoa, endereco), HttpStatus.OK);
+        return new ResponseEntity<>(enderecoService.create(idPessoa,endereco), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
