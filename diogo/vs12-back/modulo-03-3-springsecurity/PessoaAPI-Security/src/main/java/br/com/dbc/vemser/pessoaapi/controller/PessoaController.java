@@ -59,12 +59,12 @@ public class PessoaController{
 
 
     @GetMapping("/pessoa-completo")
-    public List<PessoaEntity> todasPessoas(@RequestParam(name = "idPessoa", required = false) Integer idPessoa) {
-        return pessoaService.todasPessoas(idPessoa);
+    public List<PessoaEntity> getAllPessoas(@RequestParam(name = "idPessoa", required = false) Integer idPessoa) {
+        return pessoaService.getAllPessoas(idPessoa);
     }
 
     @GetMapping("/query-pessoa")
-    public List<PessoaEmailDTO> todosDados() {
+    public List<PessoaEmailDTO> getDados() {
         return pessoaService.findAllPessoaEmailDTO();
     }
 }

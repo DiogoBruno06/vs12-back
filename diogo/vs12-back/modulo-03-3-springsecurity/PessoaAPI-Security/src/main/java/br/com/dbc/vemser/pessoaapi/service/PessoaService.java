@@ -76,7 +76,7 @@ public class PessoaService {
                 .collect(Collectors.toList());
     }
 
-    public List<PessoaEntity> todasPessoas(Integer idPessoa) {
+    public List<PessoaEntity> getAllPessoas(Integer idPessoa) {
         if (idPessoa != null) {
             return pessoaRepository.findAllComOptional(idPessoa);
         } else {

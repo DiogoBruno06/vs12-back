@@ -43,7 +43,7 @@ public class PetController {
 
     @GetMapping("/query-PET")
     public List<PetQueryDTO> petQuery() {
-        return petService.todosOsNomesPets();
+        return petService.getAllPetNames();
     }
 
 }

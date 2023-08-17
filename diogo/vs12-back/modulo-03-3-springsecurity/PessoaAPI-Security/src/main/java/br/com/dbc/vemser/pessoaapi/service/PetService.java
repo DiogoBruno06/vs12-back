@@ -55,7 +55,7 @@ public class PetService {
                 .collect(Collectors.toList());
     }
 
-    public List<PetQueryDTO> todosOsNomesPets() {
+    public List<PetQueryDTO> getAllPetNames() {
         return petRepository.findAllPetNames();
     }
 
