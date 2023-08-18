@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.PessoaControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
@@ -16,11 +17,10 @@ import java.util.List;
 
 @Validated
 @RestController
-@RequestMapping("/pessoa") // localhost:8080/pessoa
-public class PessoaController{
+@RequestMapping("/pessoa")
+public class PessoaController implements PessoaControllerDoc {
 
-    // Modelo ANTIGO de Injeção
-    // @Autowired
+
     private final PessoaService pessoaService;
 
     @Value("${user}")
@@ -34,24 +34,23 @@ public class PessoaController{
     }
 
 
-    @GetMapping("/byname") // GET localhost:8080/pessoa/byname?nome=Rafa
+    @GetMapping("/byname")
     public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
         return ResponseEntity.ok(pessoaService.listByName(nome));
     }
 
-    @PostMapping // POST localhost:8080/pessoa
+    @PostMapping
     public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoa) {
         return new ResponseEntity<>(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
-    // Atualizar pessoa
-    @PutMapping("/{idPessoa}") // PUT localhost:8080/pessoa/1000
+    @PutMapping("/{idPessoa}")
     public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id,
                                             @RequestBody @Valid PessoaCreateDTO pessoaAtualizada) throws Exception {
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizada));
     }
 
-    @DeleteMapping("/{idPessoa}") // DELETE localhost:8080/pessoa/10
+    @DeleteMapping("/{idPessoa}")
     public ResponseEntity<Void> delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
         return ResponseEntity.ok().build();
@@ -59,12 +58,12 @@ public class PessoaController{
 
 
     @GetMapping("/pessoa-completo")
-    public List<PessoaEntity> todasPessoas(@RequestParam(name = "idPessoa", required = false) Integer idPessoa) {
-        return pessoaService.todasPessoas(idPessoa);
+    public List<PessoaEntity> getAllPessoas(@RequestParam(name = "idPessoa", required = false) Integer idPessoa) {
+        return pessoaService.getAllPessoas(idPessoa);
     }
 
     @GetMapping("/query-pessoa")
-    public List<PessoaEmailDTO> todosDados() {
+    public List<PessoaEmailDTO> getDados() {
         return pessoaService.findAllPessoaEmailDTO();
     }
 }

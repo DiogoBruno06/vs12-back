@@ -3,7 +3,6 @@ package br.com.dbc.vemser.pessoaapi.controller;
 import br.com.dbc.vemser.pessoaapi.client.DadosPessoaisClient;
 import br.com.dbc.vemser.pessoaapi.dto.DadosPessoaisDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 @RequestMapping("/dados-pessoais")
 @RequiredArgsConstructor
 public class DadosPessoaisController {
-   // @Autowired
+    // @Autowired
     private final DadosPessoaisClient client;
 
     @GetMapping
@@ -28,7 +27,7 @@ public class DadosPessoaisController {
 
     @PutMapping("/{cpf}")
     public DadosPessoaisDTO update(@PathVariable("cpf") String cpf,
-                          @RequestBody DadosPessoaisDTO dto) throws Exception {
+                                   @RequestBody DadosPessoaisDTO dto) throws Exception {
         return client.put(cpf, dto);
     }
 

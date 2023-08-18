@@ -1,11 +1,9 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.dbc.vemser.pessoaapi.documentacao.EnderecoControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.EnderecoQueryDTO;
-import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
-public class EnderecoController {
+public class EnderecoController implements EnderecoControllerDoc {
     @Autowired
     private EnderecoService enderecoService;
 
@@ -28,13 +26,13 @@ public class EnderecoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer idPessoa,
-                                             @RequestBody EnderecoCreateDTO endereco) throws Exception {
+                                              @RequestBody EnderecoCreateDTO endereco) throws Exception {
         return new ResponseEntity<>(enderecoService.create(idPessoa,endereco), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<EnderecoDTO> update(@PathVariable("id") Integer id,
-                                 @RequestBody EnderecoCreateDTO enderecoEntity) throws Exception {
+                                              @RequestBody EnderecoCreateDTO enderecoEntity) throws Exception {
         return new ResponseEntity<>(enderecoService.update(id,enderecoEntity), HttpStatus.OK);
     }
 
@@ -44,9 +42,16 @@ public class EnderecoController {
     }
 
     @GetMapping("/{idEndereco}")
-    public EnderecoEntity findById(@PathVariable("idEndereco") Integer id) throws Exception {
-        return enderecoService.findByIdPessoa(id);
+    public EnderecoDTO findById(@PathVariable("idEndereco") Integer idEndereco) throws Exception {
+        return enderecoService.getById(idEndereco);
     }
+
+    @GetMapping("/{idPessoa}/pessoa")
+    public List<EnderecoEntity> findByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws Exception {
+        return enderecoService.getByIdPessoa(idPessoa);
+    }
+
+
 
     @GetMapping("/query-endereco")
     public List<EnderecoQueryDTO> getDados() {

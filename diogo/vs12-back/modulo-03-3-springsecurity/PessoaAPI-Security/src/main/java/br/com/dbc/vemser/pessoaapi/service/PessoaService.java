@@ -11,6 +11,9 @@ import br.com.dbc.vemser.pessoaapi.repository.ContatoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -102,5 +105,10 @@ public class PessoaService {
         return pessoaRepository.findAllPessoaEmailDTO();
     }
 
+    public Page<PessoaEntity> listPaginado(Integer paginaQueEuQuero,
+                                           Integer quantidadeDeRegistrosPorPagina) {
+        Pageable pageable = PageRequest.of(paginaQueEuQuero, quantidadeDeRegistrosPorPagina);
+        return pessoaRepository.findAll(pageable);
+    }
 }
 

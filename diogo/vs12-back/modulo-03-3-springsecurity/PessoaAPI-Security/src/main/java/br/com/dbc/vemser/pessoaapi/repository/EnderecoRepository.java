@@ -14,7 +14,10 @@ import java.util.List;
 
 @Repository
 public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Integer> {
+
     @Query("SELECT NEW br.com.dbc.vemser.pessoaapi.dto.dtosquery.EnderecoQueryDTO(e.cep,e.cidade,e.estado,e.pais) FROM ENDERECO_PESSOA e")
     List<EnderecoQueryDTO> findAllByCep();
+
+    List<EnderecoEntity> findByPessoas_idPessoa(Integer idPessoa);
 }
 

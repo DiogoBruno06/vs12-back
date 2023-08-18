@@ -2,8 +2,6 @@ package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.dto.*;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.EnderecoQueryDTO;
-import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
@@ -12,7 +10,6 @@ import br.com.dbc.vemser.pessoaapi.repository.EnderecoRepository;
 import br.com.dbc.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,13 +27,9 @@ public class EnderecoService {
 
     private final String NOT_FOUND_MESSAGE = "ID da pessoa nao encontrada";
     public void delete(Integer id) throws Exception {
-        try {
-            EnderecoEntity enderecoEntityRecuperado = findById(id);
-            enderecoRepository.delete(enderecoEntityRecuperado);
-            emailService.EnderecoDeletar();
-        } catch (EntidadeNaoEncontradaException ex){
-            ex.printStackTrace();
-        }
+        EnderecoEntity enderecoEntityRecuperado = enderecoRepository.getById(id);
+        enderecoRepository.delete(enderecoEntityRecuperado);
+        emailService.EnderecoDeletar();
     }
 
     public EnderecoDTO create(Integer idPessoa,EnderecoCreateDTO endereco) throws Exception {
@@ -49,7 +42,7 @@ public class EnderecoService {
     }
 
     public EnderecoDTO update(Integer id, EnderecoCreateDTO enderecoDTO) throws Exception {
-        EnderecoEntity enderecoEntityRecuperado = findById(id);
+        EnderecoEntity enderecoEntityRecuperado = enderecoRepository.getById(id);
 
         enderecoEntityRecuperado.setCep(enderecoDTO.getCep());
         enderecoEntityRecuperado.setCidade(enderecoDTO.getCidade());
@@ -72,15 +65,15 @@ public class EnderecoService {
     }
 
 
-    public EnderecoEntity findById(Integer id) throws Exception {
-        return enderecoRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(NOT_FOUND_MESSAGE));
-
+    public EnderecoDTO getById(Integer id) throws RegraDeNegocioException {
+        EnderecoEntity endereco = enderecoRepository.getById(id);
+        EnderecoDTO dto = objectMapper.convertValue(endereco,EnderecoDTO.class);
+        return dto;
     }
 
-    public EnderecoEntity findByIdPessoa(Integer idPessoa) throws Exception {
-        return enderecoRepository.findById(idPessoa)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(NOT_FOUND_MESSAGE));
+    public List<EnderecoEntity> getByIdPessoa(Integer idPessoa) throws RegraDeNegocioException {
+        List<EnderecoEntity> endereco = enderecoRepository.findByPessoas_idPessoa(idPessoa);
+        return endereco;
     }
 
     public EnderecoEntity converterDTO(EnderecoCreateDTO dto) {

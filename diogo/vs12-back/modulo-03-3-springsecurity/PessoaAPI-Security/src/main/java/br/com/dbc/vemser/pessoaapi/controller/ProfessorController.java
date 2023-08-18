@@ -1,8 +1,5 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
-import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
-import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
-import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.dbc.vemser.pessoaapi.entity.ProfessorEntity;
 import br.com.dbc.vemser.pessoaapi.entity.pk.ProfessorPK;
 import br.com.dbc.vemser.pessoaapi.service.ProfessorService;

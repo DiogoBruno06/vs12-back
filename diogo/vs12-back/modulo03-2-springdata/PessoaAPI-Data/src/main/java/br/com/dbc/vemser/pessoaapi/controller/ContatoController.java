@@ -1,14 +1,11 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 
+import br.com.dbc.vemser.pessoaapi.documentacao.ContatoControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.ContatoQueryDTO;
-import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.ContatoEntity;
-import br.com.dbc.vemser.pessoaapi.entity.EnderecoEntity;
-import br.com.dbc.vemser.pessoaapi.exceptions.EntidadeNaoEncontradaException;
-import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.service.ContatoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contato")
-public class ContatoController {
+public class ContatoController implements ContatoControllerDoc {
     private final ContatoService contatoService;
 
     public ContatoController(ContatoService contatoService) {
@@ -37,13 +34,13 @@ public class ContatoController {
 
     @PostMapping("/{idPessoa}")
     public ResponseEntity<ContatoDTO> create(@PathVariable("idPessoa") Integer idPessoa,
-                                 @RequestBody ContatoCreateDTO contato) throws Exception {
+                                             @RequestBody ContatoCreateDTO contato) throws Exception {
         return new ResponseEntity<>(contatoService.create(idPessoa, contato), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ContatoDTO update(@PathVariable("id") Integer id,
-                                @RequestBody ContatoCreateDTO contato) throws Exception {
+                             @RequestBody ContatoCreateDTO contato) throws Exception {
         return contatoService.update(id, contato);
     }
 
@@ -52,8 +49,8 @@ public class ContatoController {
         contatoService.delete(id);
     }
 
-    @GetMapping("/query-contato")
-    public List<ContatoQueryDTO> getNumero() {
+    @GetMapping("/numeroContato")
+    public List<ContatoQueryDTO> mostraNumero(){
         return contatoService.getAllByNumero();
     }
 }

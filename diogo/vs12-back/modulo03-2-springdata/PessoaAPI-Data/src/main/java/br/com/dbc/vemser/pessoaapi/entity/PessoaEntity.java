@@ -9,7 +9,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -52,6 +54,12 @@ public class PessoaEntity {
     private Set<PetEntity> pet;
 
 
+//    public List<EnderecoEntity> getEnderecosById(Integer pessoaId) {
+//        return enderecos.stream()
+//                .filter(endereco -> endereco.getPessoas().stream()
+//                        .anyMatch(pessoa -> pessoa.getIdPessoa().equals(pessoaId)))
+//                .collect(Collectors.toList());
+//    }
 
 
 }
