@@ -1,7 +1,10 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
+import br.com.dbc.vemser.pessoaapi.dto.LoginDTO;
+import br.com.dbc.vemser.pessoaapi.dto.UsuarioDTO;
 import br.com.dbc.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.dbc.vemser.pessoaapi.repository.UsuarioRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
+    private final ObjectMapper objectMapper;
 
     private BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -29,9 +33,9 @@ public class UsuarioService {
         return usuarioRepository.findByLogin(login);
     }
 
-    public Optional<UsuarioEntity> create(UsuarioEntity usuario){
+    public UsuarioDTO create(LoginDTO loginDTO){
+        UsuarioEntity usuario = objectMapper.convertValue(loginDTO,UsuarioEntity.class);
         usuario.setSenha(passwordEncoder().encode(usuario.getSenha()));
-        UsuarioEntity usuarioCriado = usuarioRepository.save(usuario);
-        return Optional.of(usuarioCriado);
+        return objectMapper.convertValue(usuarioRepository.save(usuario), UsuarioDTO.class);
     }
 }

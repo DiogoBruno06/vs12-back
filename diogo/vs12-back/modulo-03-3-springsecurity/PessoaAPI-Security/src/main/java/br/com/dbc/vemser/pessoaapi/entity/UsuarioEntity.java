@@ -34,43 +34,41 @@ public class UsuarioEntity implements UserDetails {
     public UsuarioEntity(String login, String senhaCodificada) {
     }
 
-    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>();
     }
 
-    @JsonIgnore
     @Override
     public String getPassword() {
         return senha;
     }
 
-    @JsonIgnore
+
     @Override
     public String getUsername() {
         return login;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isEnabled() {
         return true;

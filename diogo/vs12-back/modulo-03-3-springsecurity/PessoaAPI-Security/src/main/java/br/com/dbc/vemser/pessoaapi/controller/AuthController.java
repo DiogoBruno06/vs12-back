@@ -1,11 +1,14 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.LoginDTO;
+import br.com.dbc.vemser.pessoaapi.dto.UsuarioDTO;
 import br.com.dbc.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.dbc.vemser.pessoaapi.exceptions.RegraDeNegocioException;
 import br.com.dbc.vemser.pessoaapi.security.TokenService;
 import br.com.dbc.vemser.pessoaapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,10 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Optional<UsuarioEntity> login (@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException {
-        UsuarioEntity usuarioCadastrado = new UsuarioEntity();
-        usuarioCadastrado.setLogin(loginDTO.getLogin());
-        usuarioCadastrado.setSenha(loginDTO.getSenha());
-        return usuarioService.create(usuarioCadastrado);
+    public ResponseEntity<UsuarioDTO> login (@RequestBody @Valid LoginDTO loginDTO) throws RegraDeNegocioException {
+        return new ResponseEntity<>(usuarioService.create(loginDTO), HttpStatus.OK);
     }
 }

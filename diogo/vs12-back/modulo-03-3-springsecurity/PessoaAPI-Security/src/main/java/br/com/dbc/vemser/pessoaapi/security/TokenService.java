@@ -26,8 +26,6 @@ public class TokenService {
     @Value("${jwt.secret}")
     private String secret;
 
-    private final UsuarioService usuarioService;
-
     public String generateToken(UsuarioEntity usuarioEntity) {
         Date now = new Date();
         Date exp = new Date(now.getTime() + Long.parseLong(expiration));
@@ -41,11 +39,6 @@ public class TokenService {
                         .signWith(SignatureAlgorithm.HS256, secret)
                         .compact();
     }
-//    public String getToken(UsuarioEntity usuarioEntity) {
-//        String tokenTexto = usuarioEntity.getLogin() + ";" + usuarioEntity.getSenha();
-//        String token = Base64.getEncoder().encodeToString(tokenTexto.getBytes());
-//        return token;
-//    }
 
     public UsernamePasswordAuthenticationToken isValid(String token) {
         if (token != null) {
