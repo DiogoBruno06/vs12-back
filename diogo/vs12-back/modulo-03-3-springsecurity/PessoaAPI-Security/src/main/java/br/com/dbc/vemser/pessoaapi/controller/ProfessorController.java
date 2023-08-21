@@ -24,7 +24,7 @@ public class ProfessorController {
         return professorService.list();
     }
 
-    @GetMapping("/{ProfessorPK}")
+    @GetMapping("/{professorid}")
     public ResponseEntity<ProfessorEntity> listById(ProfessorPK professorPK) throws Exception {
         return new ResponseEntity<>(professorService.findById(professorPK), HttpStatus.OK);
     }

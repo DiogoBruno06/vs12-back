@@ -41,7 +41,7 @@ public class PetController {
         petService.delete(id);
     }
 
-    @GetMapping("/query-PET")
+    @GetMapping("/query-pet")
     public List<PetQueryDTO> petQuery() {
         return petService.getAllPetNames();
     }

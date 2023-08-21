@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.service;
 
 import br.com.dbc.vemser.pessoaapi.client.DadosPessoaisClient;
+import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
@@ -32,6 +33,12 @@ public class PessoaService {
     public PessoaDTO create(PessoaCreateDTO pessoa) {
         PessoaEntity pessoaEntity = converterDTO(pessoa);
         return retornarDTO(pessoaRepository.save(pessoaEntity));
+    }
+
+    public List<PessoaDTO> list() {
+        return pessoaRepository.findAll().stream()
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
     }
 
 

@@ -1,23 +1,20 @@
 package br.com.dbc.vemser.pessoaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity(name = "USUARIO")
-@AllArgsConstructor
-@NoArgsConstructor
 public class UsuarioEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USUARIO_SEQUENCIA")
@@ -31,9 +28,18 @@ public class UsuarioEntity implements UserDetails {
     @Column(name = "senha")
     private String senha;
 
-    public UsuarioEntity(String login, String senhaCodificada) {
-    }
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "USUARIO_CARGO",
+            joinColumns = @JoinColumn(name = "ID_USUARIO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_CARGO")
+    )
+    private Set<CargoEntity> cargos = new HashSet<>();
 
+    public void addCargo(CargoEntity cargoEntity){
+        this.cargos.add(cargoEntity);
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>();
@@ -44,30 +50,25 @@ public class UsuarioEntity implements UserDetails {
         return senha;
     }
 
-
     @Override
     public String getUsername() {
         return login;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
 
     @Override
     public boolean isEnabled() {

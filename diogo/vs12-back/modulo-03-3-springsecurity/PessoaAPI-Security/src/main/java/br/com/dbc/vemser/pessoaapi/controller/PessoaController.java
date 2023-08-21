@@ -2,6 +2,7 @@ package br.com.dbc.vemser.pessoaapi.controller;
 
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO;
 import br.com.dbc.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.dbc.vemser.pessoaapi.service.PessoaService;
@@ -36,6 +37,11 @@ public class PessoaController{
     @GetMapping("/byname")
     public ResponseEntity<List<PessoaDTO>> listByName(@RequestParam("nome") String nome) {
         return ResponseEntity.ok(pessoaService.listByName(nome));
+    }
+
+    @GetMapping
+    public List<PessoaDTO> list() {
+        return pessoaService.list();
     }
 
     @PostMapping

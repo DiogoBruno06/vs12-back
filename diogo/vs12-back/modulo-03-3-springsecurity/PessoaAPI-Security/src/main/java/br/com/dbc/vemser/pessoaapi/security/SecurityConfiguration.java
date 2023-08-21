@@ -7,9 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration{
+public class SecurityConfiguration {
     private final TokenService tokenService;
 
     @Bean
@@ -31,9 +29,18 @@ public class SecurityConfiguration{
                 .cors().and()
                 .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
-                        .antMatchers("/auth","/auth/login/**" ).permitAll()
+                        .antMatchers("/auth", "/auth/login/**").hasRole("ADMIN")
                         .antMatchers("/auth", "/").permitAll()
-                        .anyRequest().authenticated()
+                        .antMatchers(HttpMethod.DELETE, "/pessoa").hasAnyRole("ADMIN", "USUARIO")
+                        .antMatchers(HttpMethod.GET, "/pet").hasAnyRole("MARKETING", "USUARIO")
+                        .antMatchers(HttpMethod.GET, "/pessoa").hasAnyRole("MARKETING", "USUARIO")
+                        .antMatchers(HttpMethod.GET, "/contato").hasAnyRole("MARKETING", "USUARIO")
+                        .antMatchers(HttpMethod.GET, "/endereco").hasAnyRole("MARKETING", "USUARIO")
+                        .antMatchers("/pessoa/**").hasAnyRole("ADMIN","USUARIO")
+                        .antMatchers("/contato/**").hasAnyRole("ADMIN","USUARIO")
+                        .antMatchers("/endereco/**").hasAnyRole("ADMIN", "USUARIO")
+                        .antMatchers("/pet/**").hasRole("ADMIN")
+                        .anyRequest().denyAll()
                 );
         http.addFilterBefore(new TokenAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
 
@@ -61,14 +68,13 @@ public class SecurityConfiguration{
     }
 
 
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
