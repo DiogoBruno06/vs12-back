@@ -7,82 +7,90 @@ db.createCollection("alunos")
 
 -- INSERIR DOCS
 
-db.alunos.insertOne({"nome" : "Breno Franco", "data_nascimento" : new Date(2000-10-12)})
+db.alunos.insertOne({"nome" : "Diogo", "data_nascimento" : ISODate("2004-10-06T12:00:00Z")})
 {
-    acknowledged: true,
-        insertedId: ObjectId("64e58f0d8cf9ea4e38d8e90f")
+  acknowledged: true,
+  insertedId: ObjectId("64ec2d31349a623d3415f299")
 }
 
-db.alunos.insertOne({"nome" : "Cayo Hollanda", "data_nascimento" : new Date(1998-06-10)})
+db.alunos.insertOne({"nome" : "Diego", "data_nascimento" : ISODate("1991-02-14T12:00:00Z")})
 {
-    acknowledged: true,
-        insertedId: ObjectId("64e58f2c8cf9ea4e38d8e910")
+  acknowledged: true,
+  insertedId: ObjectId("64ec2d54349a623d3415f29a")
 }
 
-db.alunos.insertOne({"nome" : "João Luís", "data_nascimento" : new Date(2004-10-03)})
+db.alunos.insertOne({"nome" : "Luana", "data_nascimento" : ISODate("2004-11-20T12:00:00Z")})
 {
-    acknowledged: true,
-        insertedId: ObjectId("64e58f468cf9ea4e38d8e911")
+  acknowledged: true,
+  insertedId: ObjectId("64ec2d6c349a623d3415f29b")
 }
 
-db.alunos.insertOne({"nome" : "Lucas Fernandes", "data_nascimento" : new Date(1999-03-19)})
+ db.alunos.insertOne({"nome" : "Maria", "data_nascimento" : ISODate("2002-09-14T12:00:00Z")})
 {
-    acknowledged: true,
-        insertedId: ObjectId("64e58f548cf9ea4e38d8e912")
+  acknowledged: true,
+  insertedId: ObjectId("64ec2d89349a623d3415f29c")
 }
 
-db.alunos.insertOne({"nome" : "Luana", "data_nascimento" : new Date(2004-11-20)})
+db.alunos.insertOne({"nome" : "Breno", "data_nascimento" : ISODate("1999-03-14T12:00:00Z")})
 {
-    acknowledged: true,
-        insertedId: ObjectId("64e58f6c8cf9ea4e38d8e913")
+  acknowledged: true,
+  insertedId: ObjectId("64ec2d9d349a623d3415f29d")
 }
+
+db.alunos.insertOne({"nome" : "João Luís", "data_nascimento" : ISODate("2004-10-03T12:00:00Z")})
+{
+  acknowledged: true,
+  insertedId: ObjectId("64ec2dbb349a623d3415f29e")
+}
+
+ db.alunos.insertOne({"nome" : "Lucas", "data_nascimento" : ISODate("2004-10-03T12:00:00Z")})
+{
+  acknowledged: true,
+  insertedId: ObjectId("64ec2dcc349a623d3415f29f")
+}
+
 
 -- QUERY
 
-db.alunos.find({"nome" : /[a-zA-z].e/})
+ db.alunos.find({"nome" : /Di.*go/})
 [
   {
-    _id: ObjectId("64e58f0d8cf9ea4e38d8e90f"),
-    nome: 'Breno Franco',
-    data_nascimento: ISODate("1970-01-01T00:00:01.978Z")
+    _id: ObjectId("64ec2d31349a623d3415f299"),
+    nome: 'Diogo',
+    data_nascimento: ISODate("2004-10-06T12:00:00.000Z")
   },
   {
-    _id: ObjectId("64e58f548cf9ea4e38d8e912"),
-    nome: 'Lucas Fernandes',
-    data_nascimento: ISODate("1970-01-01T00:00:01.977Z")
+    _id: ObjectId("64ec2d54349a623d3415f29a"),
+    nome: 'Diego',
+    data_nascimento: ISODate("1991-02-14T12:00:00.000Z")
   }
 ]
 
-db.alunos.find({"nome": "Luana"})
+ db.alunos.find({"nome": "Luana"})
 [
   {
-    _id: ObjectId("64e58f6c8cf9ea4e38d8e913"),
+    _id: ObjectId("64ec2d6c349a623d3415f29b"),
     nome: 'Luana',
-    data_nascimento: ISODate("1970-01-01T00:00:01.973Z")
+    data_nascimento: ISODate("2004-11-20T12:00:00.000Z")
   }
 ]
 
-db.alunos.find({"nome" : /[a-zA-z].a/})
+db.alunos.find({"nome" : /[a-zA-z/.a/})
 [
   {
-    _id: ObjectId("64e58f0d8cf9ea4e38d8e90f"),
-    nome: 'Breno Franco',
-    data_nascimento: ISODate("1970-01-01T00:00:01.978Z")
-  },
-  {
-    _id: ObjectId("64e58f2c8cf9ea4e38d8e910"),
-    nome: 'Cayo Hollanda',
-    data_nascimento: ISODate("1970-01-01T00:00:01.982Z")
-  },
-  {
-    _id: ObjectId("64e58f548cf9ea4e38d8e912"),
-    nome: 'Lucas Fernandes',
-    data_nascimento: ISODate("1970-01-01T00:00:01.977Z")
-  },
-  {
-    _id: ObjectId("64e58f6c8cf9ea4e38d8e913"),
+    _id: ObjectId("64ec2d6c349a623d3415f29b"),
     nome: 'Luana',
-    data_nascimento: ISODate("1970-01-01T00:00:01.973Z")
+    data_nascimento: ISODate("2004-11-20T12:00:00.000Z")
+  },
+  {
+    _id: ObjectId("64ec2d89349a623d3415f29c"),
+    nome: 'Maria',
+    data_nascimento: ISODate("2002-09-14T12:00:00.000Z")
+  },
+  {
+    _id: ObjectId("64ec2dcc349a623d3415f29f"),
+    nome: 'Lucas',
+    data_nascimento: ISODate("2004-10-03T12:00:00.000Z")
   }
 ]
 
