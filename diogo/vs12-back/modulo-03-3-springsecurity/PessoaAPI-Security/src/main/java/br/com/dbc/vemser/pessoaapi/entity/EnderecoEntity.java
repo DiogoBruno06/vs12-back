@@ -49,7 +49,7 @@ public class EnderecoEntity {
     private String pais;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "enderecos")
+    @ManyToMany(mappedBy = "enderecos", fetch = FetchType.LAZY)
     private Set<PessoaEntity> pessoas;
 
 }

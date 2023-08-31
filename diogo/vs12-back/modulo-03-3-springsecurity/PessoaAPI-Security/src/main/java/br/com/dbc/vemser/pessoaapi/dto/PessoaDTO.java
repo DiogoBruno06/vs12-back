@@ -18,10 +18,4 @@ import java.util.Set;
 public class PessoaDTO extends PessoaCreateDTO {
     @Schema(description = "Identificador único da pessoa")
     private Integer idPessoa;
-
-    private Set<ContatoEntity> contatos;
-
-    private Set<EnderecoEntity> enderecos;
-
-    private Set<PetEntity> pets;
 }

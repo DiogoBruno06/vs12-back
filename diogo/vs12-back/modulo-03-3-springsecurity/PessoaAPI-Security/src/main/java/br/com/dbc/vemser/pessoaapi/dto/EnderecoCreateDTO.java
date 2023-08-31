@@ -27,6 +27,7 @@ public class EnderecoCreateDTO {
     private String logradouro;
 
     @NotNull(message = "Número não pode ser nulo")
+    @Size(min = 1, max = 3)
     private Integer numero;
 
     private String complemento;

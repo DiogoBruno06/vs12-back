@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PessoaEmailDTO {
-    private Integer getIdPessoa;
-    private String getNome;
-    private String getEmail;
+    private Integer IdPessoa;
+    private String Nome;
+    private String Email;
 
-    public PessoaEmailDTO(Integer getIdPessoa, String getNome, String getEmail) {
-        this.getIdPessoa = getIdPessoa;
-        this.getNome = getNome;
-        this.getEmail = getEmail;
+    public PessoaEmailDTO(Integer idPessoa, String nome, String email) {
+        IdPessoa = idPessoa;
+        Nome = nome;
+        Email = email;
     }
 }

@@ -33,7 +33,7 @@ public interface EnderecoControllerDoc {
             }
     )
     @GetMapping("/{idEndereco}")
-    EnderecoEntity findById(@PathVariable("idEndereco") Integer id) throws Exception;
+    EnderecoDTO findById(@PathVariable("idEndereco") Integer id) throws Exception;
 
     @Operation(summary = "Cria um endereco pelo idPessoa", description = "Cria um endereço com o id passado na requisição")
     @ApiResponses(

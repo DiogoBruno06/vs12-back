@@ -53,7 +53,7 @@ public class ConsumerService {
 
         StringBuilder sb = new StringBuilder();
         sb.append(formatacaoData);
-        sb.append("{ " + mensagemDTO.getUsuario() + "}(privado): ");
+        sb.append("{" + mensagemDTO.getUsuario() + "}(privado): ");
         sb.append(mensagemDTO.getMensagem());
         log.info(sb.toString());
     }

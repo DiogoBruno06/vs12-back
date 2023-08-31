@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 
+import br.com.dbc.vemser.pessoaapi.documentacao.ContatoControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.ContatoQueryDTO;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contato")
-public class ContatoController {
+public class ContatoController implements ContatoControllerDoc {
     private final ContatoService contatoService;
 
     public ContatoController(ContatoService contatoService) {
@@ -49,7 +50,7 @@ public class ContatoController {
     }
 
     @GetMapping("/query-contato")
-    public List<ContatoQueryDTO> getNumero() {
+    public List<ContatoQueryDTO> numeroContato() {
         return contatoService.getAllByNumero();
     }
 }

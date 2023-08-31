@@ -19,16 +19,5 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
 
     @Query("SELECT NEW br.com.dbc.vemser.pessoaapi.dto.dtosquery.PessoaEmailDTO(p.idPessoa, p.nome, p.email) FROM PESSOA p")
     List<PessoaEmailDTO> findAllPessoaEmailDTO();
-
-    @Query(value = "select * " +
-            "         from PESSOA " +
-            "        where upper(nome) like upper(:nome)",
-            countQuery = "select count(*) " +
-                    "         from PESSOA " +
-                    "        where upper(nome) like upper(:nome)", nativeQuery = true)
-    Page<PessoaEntity> getPorQualquerNomePaginadoNativo(String nome, Pageable pageable);
-
-    @Query(value = "select p from PESSOA p where upper(p.nome) like upper(:nome)")
-    Page<PessoaEntity> getPorQualquerNomeJPQL(String nome, Pageable pageable);
 }
 

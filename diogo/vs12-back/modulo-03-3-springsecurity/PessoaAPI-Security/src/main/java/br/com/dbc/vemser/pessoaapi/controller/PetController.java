@@ -1,6 +1,7 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
 
+import br.com.dbc.vemser.pessoaapi.documentacao.PetControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.*;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.PetQueryDTO;
 import br.com.dbc.vemser.pessoaapi.service.PetService;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/pet")
 @RequiredArgsConstructor
-public class PetController {
+public class PetController implements PetControllerDoc {
 
     private final PetService petService;
 

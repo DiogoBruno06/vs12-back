@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.EnderecoControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.dbc.vemser.pessoaapi.dto.dtosquery.EnderecoQueryDTO;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
-public class EnderecoController {
+public class EnderecoController implements EnderecoControllerDoc {
     @Autowired
     private EnderecoService enderecoService;
 

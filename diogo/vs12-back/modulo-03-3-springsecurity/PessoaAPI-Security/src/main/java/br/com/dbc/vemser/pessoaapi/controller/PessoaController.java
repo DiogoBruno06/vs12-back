@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.PessoaControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
@@ -18,7 +19,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequestMapping("/pessoa")
-public class PessoaController{
+public class PessoaController implements PessoaControllerDoc {
 
 
     private final PessoaService pessoaService;
@@ -40,8 +41,8 @@ public class PessoaController{
     }
 
     @GetMapping
-    public List<PessoaDTO> list() {
-        return pessoaService.list();
+    public ResponseEntity<List<PessoaDTO>> list() {
+        return ResponseEntity.ok(pessoaService.list());
     }
 
     @PostMapping

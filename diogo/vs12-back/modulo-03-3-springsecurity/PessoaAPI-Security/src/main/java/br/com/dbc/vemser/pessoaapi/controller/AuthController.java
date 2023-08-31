@@ -1,5 +1,6 @@
 package br.com.dbc.vemser.pessoaapi.controller;
 
+import br.com.dbc.vemser.pessoaapi.documentacao.AuthControllerDoc;
 import br.com.dbc.vemser.pessoaapi.dto.LoginCreateDTO;
 import br.com.dbc.vemser.pessoaapi.dto.LoginDTO;
 import br.com.dbc.vemser.pessoaapi.dto.PetDTO;
@@ -26,7 +27,7 @@ import java.util.Optional;
 @RequestMapping("/auth")
 @Validated
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthController implements AuthControllerDoc {
     public final AuthenticationManager authenticationManager;
     private final TokenService tokenService;
     private final UsuarioService usuarioService;
@@ -49,7 +50,7 @@ public class AuthController {
         return tokenService.generateToken(usuarioValidado);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/cadastro")
     public ResponseEntity<LoginCreateDTO> loginCreate(@RequestBody @Valid LoginCreateDTO loginCreateDTO) throws RegraDeNegocioException {
         return new ResponseEntity<>(usuarioService.create(loginCreateDTO), HttpStatus.OK);
     }
